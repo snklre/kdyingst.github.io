@@ -1,28 +1,20 @@
 h1 {
   color: rgb(0, 4, 8);
-  @font-face {
-    font-family: "BruanLinear-Regular";
-    src: "assets/BraunLinear-Regular.ttf";
+  font-family: 'BraunLinear-Regular', Times, serif;
   font-size: 60px;
-  text-align: center;
 }
 
 h2 {
   color: rgb(4, 4, 51);
-  @font-face {
-    font-family: "BruanLinear-Regular";
-    src: "assets/BraunLinear-Regular.ttf";
+  font-family: 'BraunLinear-Regular', Times, serif;
   font-size: 40px;
-  text-align: center;
 }
 
 h3 {
   color: rgb(4, 4, 51);
-  @font-face {
-    font-family: "BruanLinear-Regular";
-    src: "assets/BraunLinear-Regular.ttf";
-  font-size: 40px;
-  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: x-large;
 }
 
 body {
@@ -39,7 +31,7 @@ body {
       src: "assets/BraunLinear-Regular.ttf";
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
