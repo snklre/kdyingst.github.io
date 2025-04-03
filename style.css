@@ -30,11 +30,3 @@ body {
       font-family: "BruanLinear-Regular";
       src: "assets/BraunLinear-Regular.ttf";
 }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background-color: #efe9d3e4;
-  width: 100%;
-}
