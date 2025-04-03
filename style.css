@@ -28,6 +28,6 @@ body {
     padding: 40px;
     font-size: 20px;
     @font-face {
-      font-family: "BruanLinear-Regular";
-      src: "assets/BraunLinear-Regular.ttf";
+      font-family: "BraunLinear-Regular";
+      src= "assets/BraunLinear-Regular.ttf";
 }
