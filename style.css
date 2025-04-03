@@ -25,10 +25,10 @@ body {
   body {
     margin: auto;
     width: 600px;
-    padding: 0px;
+    padding: 40px;
     @font-face {
       font-family: "Bruan Linear-Regular";
-      src: "../fonts/YanoneKaffeesatz-Regular.ttf";
+      src: "assets/BraunLinear-Regular.ttf";
   }
 
 html, body {
