@@ -4,6 +4,7 @@ h1 {
     font-family: "BruanLinear-Regular";
     src: "assets/BraunLinear-Regular.ttf";
   font-size: 60px;
+  text-align: center;
 }
 
 h2 {
@@ -12,6 +13,7 @@ h2 {
     font-family: "BruanLinear-Regular";
     src: "assets/BraunLinear-Regular.ttf";
   font-size: 40px;
+  text-align: center;
 }
 
 h3 {
@@ -20,6 +22,7 @@ h3 {
     font-family: "BruanLinear-Regular";
     src: "assets/BraunLinear-Regular.ttf";
   font-size: 40px;
+  text-align: center;
 }
 
 body {
