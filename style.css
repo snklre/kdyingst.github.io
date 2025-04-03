@@ -19,11 +19,11 @@ h3 {
 
 body {
   background-color: #fdfdfde4;
-  text-align: left;
+  text-align: center;
 }
 
   body {
-    margin: 600px;
+    margin: auto;
     width: 600px;
     padding: 50px;
     @font-face {
