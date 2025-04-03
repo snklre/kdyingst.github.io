@@ -1,18 +1,24 @@
 h1 {
   color: rgb(0, 4, 8);
-  font-family: 'BraunLinear-Regular';
+  @font-face {
+    font-family: "BruanLinear-Regular";
+    src: "assets/BraunLinear-Regular.ttf";
   font-size: 60px;
 }
 
 h2 {
   color: rgb(4, 4, 51);
-  font-family: 'BraunLinear-Regular';
+  @font-face {
+    font-family: "BruanLinear-Regular";
+    src: "assets/BraunLinear-Regular.ttf";
   font-size: 40px;
 }
 
 h3 {
   color: rgb(4, 4, 51);
-  font-family: 'BraunLinear-Regular';
+  @font-face {
+    font-family: "BruanLinear-Regular";
+    src: "assets/BraunLinear-Regular.ttf";
   font-size: 40px;
 }
 
