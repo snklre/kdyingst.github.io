@@ -1,16 +1,12 @@
 h1 {
   color: rgb(0, 4, 8);
-  @font-face {
-    font-family: "Bruan Linear-Regular";
-    src: "assets/BraunLinear-Regular.ttf";
+  font-family: 'Times New Roman', Times, serif;
   font-size: 60px;
 }
 
 h2 {
   color: rgb(4, 4, 51);
-  @font-face {
-    font-family: "Bruan Linear-Regular";
-    src: "assets/BraunLinear-Regular.ttf";
+  font-family: 'Times New Roman', Times, serif;
   font-size: x-large;
 }
 
