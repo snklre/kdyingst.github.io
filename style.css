@@ -28,12 +28,9 @@ body {
     @font-face {
       font-family: "BraunLinear-Regular";
       src= "assets/BraunLinear-Regular.ttf";
+    link {
+    color: #FF0000;
 }
-
-#link {
-  color: #FF0000;
-}
-
 a#link {
   color: #FF0000;
   text-decoration: none;
