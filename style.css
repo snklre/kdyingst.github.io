@@ -14,7 +14,7 @@ h3 {
   color: rgb(4, 4, 51);
   font-family: 'Times New Roman', Times, serif;
   font-style: italic;
-  font-size: x-large;
+  font-size: 40px;
 }
 
 body {
@@ -26,6 +26,7 @@ body {
     margin: auto;
     width: 600px;
     padding: 40px;
+    font-size: 40px;
     @font-face {
       font-family: "BruanLinear-Regular";
       src: "assets/BraunLinear-Regular.ttf";
