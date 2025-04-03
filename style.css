@@ -30,11 +30,11 @@ body {
       src= "assets/BraunLinear-Regular.ttf";
 }
 
-<head>
-  <style>
-    #link { color: #FF0000; } /* CSS link color */
-  </style>
-</head>
-<body>
-  <a id="link" href="http://example.com/">A Red Link</a>
-</body>
+#link {
+  color: #FF0000;
+}
+
+a#link {
+  color: #FF0000;
+  text-decoration: none;
+}
