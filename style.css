@@ -25,7 +25,7 @@ body {
   body {
     margin: auto;
     width: 600px;
-    padding: 50px;
+    padding: 0px;
     @font-face {
       font-family: "Bruan Linear-Regular";
       src: "../fonts/YanoneKaffeesatz-Regular.ttf";
