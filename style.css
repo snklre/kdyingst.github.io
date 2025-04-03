@@ -22,16 +22,16 @@ body {
   text-align: center;
 }
 
-  body {
+body {
     margin: auto;
     width: 600px;
     padding: 40px;
     @font-face {
       font-family: "BruanLinear-Regular";
       src: "assets/BraunLinear-Regular.ttf";
-  }
+}
 
-html, body {
+body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
