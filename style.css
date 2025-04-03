@@ -6,13 +6,13 @@ h1 {
 
 h2 {
   color: rgb(4, 4, 51);
-  font-family: 'BraunLinear-Regular', Times, serif;
+  font-family: 'BraunLinear-Regular';
   font-size: 40px;
 }
 
 h3 {
   color: rgb(4, 4, 51);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman';
   font-style: italic;
   font-size: x-large;
 }
