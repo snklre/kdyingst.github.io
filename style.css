@@ -24,7 +24,7 @@ body {
     margin: auto;
     width: 600px;
     padding: 50px;
-    font-size: 40px;
+    font-size: 30px;
     @font-face {
       font-family: "BraunLinear-Regular";
       src= "assets/BraunLinear-Regular.ttf";
