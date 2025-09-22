@@ -19,7 +19,7 @@ h3 {
 
 body {
   background-color: #de29c3b9;
-  text-align: center;
+  text-align: left;
   color: rgb(4, 4, 51);
     margin: auto;
     width: 600px;
@@ -31,7 +31,7 @@ body {
 
 }
 .link {
-  color: #FF0000;
+  color: #898080;
 }
 
 .link:hover {
