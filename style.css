@@ -28,6 +28,11 @@ body {
     @font-face {
       font-family: "BraunLinear-Regular";
       src= "assets/BraunLinear-Regular.otf";
+      a {
+        color: hotpink;
+        background-color: yellow;
+        font-weight: bold;
+      }
 
 }
 .link {
