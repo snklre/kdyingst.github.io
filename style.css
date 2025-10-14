@@ -3,10 +3,19 @@ header {
 	display: fill-available; 
 	justify-content: left; 
 	align-items: left; 
-	padding: 5px;
+	padding: 1px;
 	background-color: da85cdb9; 
 } 
- 
+hr {
+  display: block;
+  margin-top: 0.5px;
+  margin-bottom: 0.5px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
 ul { 
 	list-style-type: none; 
 	display: flex; 
@@ -15,7 +24,7 @@ ul {
 } 
  
 nav ul a { 
-	padding: 5px; 
+	padding: 1px; 
 	text-decoration: none; 
 	color: black; 
 } 
@@ -60,10 +69,10 @@ a {
         text-decoration: none;
       }
 ul {
-  width: 100vw;
-  height: 100px;
+  width: 50%;
+  height: 50px;
   padding: 20px;
   display: flex;
-  gap: 40px;
+  gap: 20px;
 }
 
