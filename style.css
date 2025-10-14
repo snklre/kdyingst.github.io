@@ -7,7 +7,7 @@ header {
 	background-color: da85cdb9; 
 } 
 hr {
-  display: block;
+  display:grid;
   margin-top: 0.5px;
   margin-bottom: 0.5px;
   margin-left: auto;
