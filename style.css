@@ -1,3 +1,29 @@
+header { 
+	width: 100%; 
+	display: fill-available; 
+	justify-content: left; 
+	align-items: left; 
+	padding: 5px;
+	background-color: da85cdb9; 
+} 
+ 
+ul { 
+	list-style-type: none; 
+	display: flex; 
+	justify-content: left; 
+	align-items: left; 
+} 
+ 
+nav ul a { 
+	padding: 5px; 
+	text-decoration: none; 
+	color: black; 
+} 
+ 
+nav ul a:hover { 
+	background-color: white; 
+} 
+
 h1 {
   color: rgb(0, 4, 8);
   font-family: 'BraunLinear-Regular', Times, serif;
@@ -30,6 +56,14 @@ body {
       src= "assets/BraunLinear-Regular.otf";
 a {
         color:rgb(9, 9, 9);
-        background-color: #fc8febb9;
+        background-color: #da85cdb9;
         text-decoration: none;
       }
+ul {
+  width: 100vw;
+  height: 100px;
+  padding: 20px;
+  display: flex;
+  gap: 40px;
+}
+
