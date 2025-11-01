@@ -67,6 +67,10 @@ a {
         color:rgb(9, 9, 9);
         background-color: #a863e8b9;
         text-decoration: white;
+        nav ul a:hover { 
+          background-color: white; 
+        }
+        
       }
 ul {
   width: 50%;
