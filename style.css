@@ -53,7 +53,7 @@ h3 {
 }
 
 body {
-  background-color: #c38dbbb9;
+  background-color: #635e5eb9;
   text-align: left;
   color: rgb(4, 4, 51);
     margin: auto;
@@ -65,7 +65,7 @@ body {
       src= "assets/BraunLinear-Regular.otf";
 a {
         color:rgb(9, 9, 9);
-        background-color: #da85cdb9;
+        background-color: #635e5eb9;
         text-decoration: none;
       }
 ul {
