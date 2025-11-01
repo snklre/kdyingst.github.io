@@ -53,7 +53,7 @@ h3 {
 }
 
 body {
-  background-color: #ffffff98;
+  background-color: #b13fc398;
   text-align: left;
   color: rgb(4, 4, 51);
     margin: auto;
@@ -70,7 +70,7 @@ a {
         nav ul a:hover { 
           background-color: white; 
         }
-        
+
       }
 ul {
   width: 50%;
