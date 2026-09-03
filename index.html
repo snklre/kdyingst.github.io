@@ -129,6 +129,36 @@
     line-height:1.6;
   }
 
+  /* The main container boxes */
+.section-box {
+  border: 2px solid #000000;
+  padding: 18px 20px; /* Generous top/bottom and left/right padding */
+  box-sizing: border-box;
+}
+
+/* Project block layout to fix text vs image alignment */
+.project-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.project-text-column {
+  max-width: 65%; /* Prevents text from crowding the image */
+}
+
+.project-title {
+  margin: 0 0 12px 0; /* Clean margin underneath the title */
+  font-weight: bold;
+}
+
+.project-description {
+  margin: 0;
+  line-height: 1.5; /* Improves text legibility on small screens */
+}
+
+
   /* ---------------------------------------------------------
      PROJECT ROWS
   --------------------------------------------------------- */
@@ -171,7 +201,7 @@
   }
 
   .p-title-row { 
-    font-size: 18px; 
+    font-size: 14px; 
     font-weight: normal;
     margin-bottom: 4px; /* Tighter layout gap above the location line */
   }
@@ -376,7 +406,6 @@
 
 
     <!-- /PROJECTS -->
-
 
 
  <p class="foot">(click a section to expand)</p>
