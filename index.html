@@ -132,6 +132,9 @@
   /* ---------------------------------------------------------
      PROJECT ROWS
   --------------------------------------------------------- */
+    /* ---------------------------------------------------------
+     PROJECT ROWS (CLEANED 2-COLUMN ARCHITECTURAL SYSTEM)
+  --------------------------------------------------------- */
   .project{
     border-bottom:1px solid var(--line);
   }
@@ -139,129 +142,96 @@
 
   .project-row {
     display: grid;
-    grid-template-columns: 1fr 280px; /* Left column expands, photo locks to 280px on desktop */
+    grid-template-columns: 1fr 280px; /* Left text side expands fluidly, photo column locks at 280px */
     width: 100%;
     background: none;
     border: none;
     cursor: cell;
     text-align: left;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     color: var(--ink);
     padding: 0;
-   }
-      .project-row:hover { background: var(--hover); }
+  }
+  .project-row:hover { background: var(--hover); }
 
+  /* Left Side Text Column Box: unified layout container handles all text components */
   .project-info-block {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    padding: 20px 24px; /* Clean interior spacing around the entire block */
+    background: transparent;
   }
+
+  /* Clear intermediate horizontal lines and margins completely */
   .p-title-row, .p-location-row, .p-desc-row {
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    border: none !important; /* Forces the browser to strip away all intermediate borders */
     line-height: 1.4;
-  .p-title-row { font-size: 18px; font-weight: normal; }
-  .p-title-row .mark { font-family: "Courier New", monospace; margin-right: 6px; }
-  .p-location-row { font-size: 15px; color: var(--ink); }
-  .p-desc-row { border-bottom: none; font-size: 12px; color: #333; line-height: 1.5; }}
-  .p-name, .p-text, .p-thumb
-  {
-    padding:12px;
-    border-right:1px solid;
   }
-  .p-thumb{ border-right:none; }
 
-  .p-name{
-    font-size:18px;
-    font-weight:300;
-    display:flex;
-    align-items:center;
-    gap:8px;
+  .p-title-row { 
+    font-size: 18px; 
+    font-weight: normal;
+    margin-bottom: 4px; /* Tighter layout gap above the location line */
   }
-  .p-name .mark{
-    font-family:"Courier New", monospace;
-    font-size:1px;
-    transition:transform 0.18s ease;
-    flex:none;
+  .p-title-row .mark { 
+    font-family: "Courier New", monospace;
+    margin-right: 6px; 
   }
-  .project.open .p-name .mark{ transform:rotate(90deg); }
 
-  .p-text{
-    font-size:12px;
-    line-height:1.2;
-    color:#030303;
-    display:flex;
-    align-items:center;
+  .p-location-row { 
+    font-size: 14px; 
+    color: var(--ink);
+    margin-bottom: 12px; /* Gives separation before the body copy paragraph starts */
+  }
+
+  .p-desc-row { 
+    font-size: 12px; 
+    color: #333; 
+    line-height: 1.5;
   }
 
   /* Right Side Photo Column Container (Maximized & Edge-to-Edge) */
   .p-thumb {
     display: flex;
-    align-items: stretch; /* Keeps height locked to your text content length */
+    align-items: stretch; /* Stretches the image container to match the height of your text */
     justify-content: center;
-    border-left: 1px solid var(--line); /* Keeps the single clean vertical dividing rule */
-    padding: 0;           /* CHANGED: Completely eliminates the inner 12px margin padding */
+    border-left: 1px solid var(--line); /* Simple, sharp vertical layout split rule */
+    padding: 0; 
     background: var(--paper);
-    overflow: hidden;     /* Ensures image corners cleanly match outer grid alignments */
+    overflow: hidden; 
   }
   
   .p-thumb img.ph {
     width: 100%;
     height: 100%;
-    object-fit: cover;    /* Fills the box completely without distortion */
-    border: none;         /* CHANGED: Removes the double nesting outline border around the image */
+    object-fit: cover; /* Fills its grid area without stretching or losing ratio properties */
+    border: none;
     display: block;
   }
 
-  .ph{
-    width:100%;
-    aspect-ratio:4/3;
-    border:1px solid var(--line);
-    position:relative;
-    background:var(--paper);
-  }
-  .ph::before, .ph::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(to top right, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px)),
-      linear-gradient(to top left, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px));
-  }
-  .ph-sm{ aspect-ratio:4/3;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border: 1px solid var(--line);
-  display: block;
-}
-
-
-  /* expanded panel */
+  /* Expanded Panel Container */
   .project-panel{
     max-height:0;
     overflow:hidden;
     transition:max-height 0.32s ease;
     border-top:1px solid var(--line-soft);
   }
-/* Locate this line: */
-.project.open .project-panel { max-height: 900px; }
-
-/* Change it to this: */
-.project.open .project-panel { max-height: none; }
+  .project.open .project-panel { 
+    max-height: none; /* Allows panel view layout to safely expand infinitely */
+  }
 
   .panel-inner{
     padding:22px 24px 28px;
   }
 
-.panel-photos {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  margin-bottom: 24px; /* Creates a clean structural baseline under the last photo */
-}
+  .panel-photos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 24px; 
+  }
 
   .panel-text{
     font-size:14px;
@@ -271,6 +241,7 @@
   }
   .panel-text p{ margin:0 0 12px; }
   .panel-text p:last-child{ margin-bottom:0; }
+
 
   /* ---------------------------------------------------------
      FOOTER NOTE
@@ -343,26 +314,27 @@
     </div>
 
     <!-- PROJECTS -->
-<div class="project" id="proj-1">
-  <button class="project-row" onclick="toggleProject('proj-1')">
-    
-    <!-- LEFT SIDE COLUMN: Text information blocks stacked vertically -->
-    <div class="project-info-block">
-      <div class="p-title-row">
-        <span class="mark">▸</span> Passive Straw House
-      </div>
+<button class="project-row" onclick="toggleProject('proj-1')">
+  
+  <!-- LEFT SIDE COLUMN: A single text container with zero interior sub-rows -->
+<!-- REPAIRED UNIFORM TEXT BLOCK -->
+<div class="project-info-block">
+  <!-- The collapse arrow mark has been completely removed from this heading row -->
+  <div class="p-title-row">Passive Straw House</div>
+  <div class="p-location-row"></div>
+  <div class="p-desc-row">
+    A climate friendly house equipped with photovoltaics, radiant heating and cooling, and active ventilation.
+  </div>
+</div>
 
-      <div class="p-desc-row">
-        A climate friendly house equipped with photovoltaics, radiant heating and cooling, and active ventilation.
-      </div>
-    </div>
-    
-    <!-- RIGHT SIDE COLUMN: Thumbnail Image Container -->
-    <div class="p-thumb">
-      <img class="ph" src="images/2-gz-12.jpg" alt="Passive Straw House exterior">
-    </div>
+  
+  <!-- RIGHT SIDE COLUMN: Thumbnail Image Container -->
+  <div class="p-thumb">
+    <img class="ph" src="images/2-gz-12.jpg" alt="Passive Straw House exterior">
+  </div>
 
-  </button>
+</button>
+
   
   <div class="project-panel">
     <div class="panel-inner">
@@ -577,17 +549,45 @@
     }
 
     /* 2. COMPACT PADDING FOR NARROW VIEWS */
-    .p-title-row, .p-location-row, .p-desc-row {
-      padding: 10px 14px; /* Tighter padding saves precious vertical screen space on phones */
-    }
-    
-    .p-title-row {
-      font-size: 16px; /* Slightly smaller title text looks cleaner on mobile devices */
-    }
-    
-    .p-desc-row {
-      font-size: 11px; /* Slightly tighter body size prevents layout elongation */
-    }
+   /* ---------------------------------------------------------
+     UPDATED TEXT BLOCK STYLING (Lines Removed)
+  --------------------------------------------------------- */
+  .p-title-row, .p-location-row, .p-desc-row {
+    padding: 12px 20px;
+    border-bottom: none; /* CHANGED: Removes the intermediate separator lines completely */
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .p-title-row { 
+    font-family: Arial, Helvetica, sans-serif; /* Matches the site name face register */
+    font-size: 14px;                           /* Scales the font down to match logo branding */
+    letter-spacing: 1px;                       /* Tracking variable matched perfectly to header */
+    font-weight: normal;                       /* Sets crisp, lightweight token weight lines */
+    margin-bottom: 6px;                        /* Controlled typography spacing down the column */
+  }
+
+  
+  .p-title-row .mark { 
+    font-family: "Courier New", monospace; 
+    margin-right: 6px; 
+  }
+  
+  .p-location-row { 
+    font-size: 15px; 
+    color: var(--ink);
+    padding-top: 0;   /* Pulls location cleanly up near the title */
+    padding-bottom: 8px; 
+  }
+  
+  .p-desc-row { 
+    font-size: 12px; 
+    color: #333; 
+    line-height: 1.5;
+    padding-top: 4px;  /* Spacing before the description body paragraph starts */
+    padding-bottom: 16px; /* Spacing at the absolute bottom of the row */
+  }
+
 
     /* 3. ENSURE MOBILE ACCORDION MODAL ZOOM STAYS EXTRA SNAP-READY */
     .modal-arrow { display: none !important; }
