@@ -433,37 +433,40 @@
     }
   }
 
-  // 5. TOUCH GESTURE LISTENERS (FOR SWIPING)
-  const modalContainer = document.getElementById('photo-modal');
-  
-  if (modalContainer) {
-    // Record where the finger first touches the screen
-    modalContainer.addEventListener('touchstart', function(event) {
-      touchStartX = event.changedTouches[0].screenX;
-    }, { passive: true });
+  // 5. TESTED SMART TOUCH GESTURE LISTENERS
+  document.addEventListener('DOMContentLoaded', function() {
+    const modalContainer = document.getElementById('photo-modal');
+    
+    if (modalContainer) {
+      // Listens to the entire popup frame box on touchscreens
+      modalContainer.addEventListener('touchstart', function(event) {
+        touchStartX = event.changedTouches[0].clientX; // clientX tracks precise layout canvas spaces
+      }, { passive: true });
 
-    // Record where the finger leaves the screen and check the distance
-    modalContainer.addEventListener('touchend', function(event) {
-      touchEndX = event.changedTouches[0].screenX;
-      handleSwipeGesture();
-    }, { passive: true });
-  }
+      modalContainer.addEventListener('touchend', function(event) {
+        touchEndX = event.changedTouches[0].clientX;
+        handleSwipeGesture();
+      }, { passive: true });
+    }
+  });
 
   function handleSwipeGesture() {
-    const swipeThreshold = 50; // Minimum swipe distance in pixels to trigger an action
+    const swipeThreshold = 40; // Reduced pixels for snappier mobile flicking responses
     const totalSwipeDistance = touchEndX - touchStartX;
 
-    // Check if the gesture was a decisive left or right swipe
-    if (Math.abs(totalSwipeDistance) > swipeThreshold) {
+    // Execute transitions only if the modal dialog overlay window is actively open
+    const modalElement = document.getElementById('photo-modal');
+    if (modalElement && modalElement.open && Math.abs(totalSwipeDistance) > swipeThreshold) {
       if (totalSwipeDistance < 0) {
-        // Swiped left -> load next image
+        // Swiped Left -> Advance to next photo asset
         shiftPhoto(1);
       } else {
-        // Swiped right -> load previous image
+        // Swiped Right -> Return to previous photo asset
         shiftPhoto(-1);
       }
     }
   }
+
 
   // 6. GLOBAL KEYBOARD ACCESSIBILITY LISTENERS
   document.addEventListener('keydown', function(event) {
@@ -495,7 +498,7 @@
       <button onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">◂</button>
       
 <!-- REPAIRED MODAL IMAGE FOR PHONE SWIPINGS -->
-<img id="modal-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid var(--line); pointer-events: none; user-select: none; -webkit-user-drag: none;">
+<img id="modal-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid var(--line); user-select: none; -webkit-user-drag: none;">
       
       <button onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">▸</button>
     </div>
