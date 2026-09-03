@@ -119,7 +119,8 @@
     overflow:hidden;
     transition:max-height 0.28s ease;
   }
-  .about.open .about-body{ max-height:260px; }
+ .about.open .about-body{ max-height: max-content; }
+.project.open .project-panel{ max-height: max-content; }
 
   .about-body p{
     margin:0;
@@ -202,7 +203,15 @@
       linear-gradient(to top right, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px)),
       linear-gradient(to top left, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px));
   }
-  .ph-sm{ aspect-ratio:4/3; }
+  .ph-sm{ aspect-ratio:4/3;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  display: block;
+}
+
 
   /* expanded panel */
   .project-panel{
@@ -211,18 +220,22 @@
     transition:max-height 0.32s ease;
     border-top:1px solid var(--line-soft);
   }
-  .project.open .project-panel{ max-height:900px; }
+/* Locate this line: */
+.project.open .project-panel { max-height: 900px; }
+
+/* Change it to this: */
+.project.open .project-panel { max-height: none; }
 
   .panel-inner{
     padding:22px 24px 28px;
   }
 
-  .panel-photos{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:14px;
-    margin-bottom:18px;
-  }
+.panel-photos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 24px; /* Creates a clean structural baseline under the last photo */
+}
 
   .panel-text{
     font-size:14px;
@@ -305,24 +318,23 @@
           <span class="p-text">Low-cost air, noise and temperature sensors deployed along a transit line to map exposure over time.</span>
           <span class="p-thumb"><span class="ph"></span></span>
         </button>
-        <div class="project-panel">
-          <div class="panel-inner">
-            <div class="panel-photos">
-              <span class="ph ph-sm"></span>
-              <span class="ph ph-sm"></span>
-              <span class="ph ph-sm"></span>
-            </div>
-            <div class="panel-text">
-              <p>Replace this paragraph with the full project write-up. A short set of
-              sensor nodes recorded particulate matter, noise levels and temperature
-              along a section of underground line, logging continuously over several
-              weeks to build a picture of conditions commuters actually experience.</p>
-              <p>Swap each &lt;span class="ph"&gt; placeholder above for an
-              &lt;img src="..."&gt; tag pointing at your own photo.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<div class="project-panel">
+  <div class="panel-inner">
+    
+    <div class="panel-photos">
+      <img class="ph ph-sm" src="images/2-gz-1.jpg" alt="...">
+      <img class="ph ph-sm" src="images/2-gz-2.jpg" alt="...">
+      <img class="ph ph-sm" src="images/2-gz-3.jpg" alt="...">
+    </div>
+
+    <div class="panel-text">
+      <p>Replace this paragraph with the full project write-up. A short set of sensor nodes recorded particulate matter, noise levels and temperature along a section of underground line, logging continuously over several weeks to build a picture of conditions commuters actually experience.</p>
+      <p>Swap each &lt;span class="ph"&gt; placeholder above for an &lt;img src="..."&gt; tag pointing at your own photo.</p>
+    </div>
+
+  </div> <!-- This closing div must go AFTER panel-text -->
+</div> <!-- Closes project-panel -->
 
       <div class="project" id="proj-2">
         <button class="project-row" onclick="toggleProject('proj-2')">
@@ -414,9 +426,9 @@
 
   </div>
 
-  <p class="foot">(click a section to expand)</p>
-</div>
 
+</div>
+  <p class="foot">(click a section to expand)</p>
 <script>
   function toggleAbout(){
     document.getElementById('about').classList.toggle('open');
