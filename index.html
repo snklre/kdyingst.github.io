@@ -433,22 +433,38 @@
     }
   }
 
-  // 5. TESTED SMART TOUCH GESTURE LISTENERS
+   // 5. BULLETPROOF DIRECT IMAGE TOUCH SWIPE ENGINE
   document.addEventListener('DOMContentLoaded', function() {
-    const modalContainer = document.getElementById('photo-modal');
+    const targetImageNode = document.getElementById('modal-img');
     
-    if (modalContainer) {
-      // Listens to the entire popup frame box on touchscreens
-      modalContainer.addEventListener('touchstart', function(event) {
-        touchStartX = event.changedTouches[0].clientX; // clientX tracks precise layout canvas spaces
+    if (targetImageNode) {
+      // Binds listeners directly on the image surface
+      targetImageNode.addEventListener('touchstart', function(event) {
+        touchStartX = event.changedTouches[0].clientX; // Capture exact first point
       }, { passive: true });
 
-      modalContainer.addEventListener('touchend', function(event) {
-        touchEndX = event.changedTouches[0].clientX;
+      targetImageNode.addEventListener('touchend', function(event) {
+        touchEndX = event.changedTouches[0].clientX; // Capture exact exit point
         handleSwipeGesture();
       }, { passive: true });
     }
   });
+
+  function handleSwipeGesture() {
+    const swipeThreshold = 30; // Low threshold means effortless, snappy flicking on phones
+    const totalSwipeDistance = touchEndX - touchStartX;
+
+    const modalElement = document.getElementById('photo-modal');
+    // Ensure gesture only runs if the overlay is active
+    if (modalElement && modalElement.open && Math.abs(totalSwipeDistance) > swipeThreshold) {
+      if (totalSwipeDistance < 0) {
+        shiftPhoto(1);  // Flick Left -> Load Next Image
+      } else {
+        shiftPhoto(-1); // Flick Right -> Load Previous Image
+      }
+    }
+  }
+
 
   function handleSwipeGesture() {
     const swipeThreshold = 40; // Reduced pixels for snappier mobile flicking responses
@@ -486,30 +502,40 @@
 
 
 
-<!-- BOTTOM-TEXT POPUP VIEW FRAME -->
+<!-- BOTTOM-TEXT POPUP VIEW FRAME (MAXIMIZED & SWIPE-READY) -->
 <dialog id="photo-modal" onclick="if(event.target === this) this.close()" style="border:3px solid var(--line); background:var(--paper); padding:0; position:fixed; top:48px; left:50%; transform:translateX(-50%); margin:0; width:95vw; max-width:1400px; height:calc(100vh - 96px); max-height:880px; z-index:9999; outline:none; box-shadow: 0 20px 50px rgba(0,0,0,0.15);">
   
   <div style="display: flex; flex-direction: column; width: 100%; height: 100%; position: relative;">
     
-    <!-- TOP AREA: MAXIMIZED PHOTO CONTAINER -->
-    <div style="position: relative; flex: 1; display: flex; align-items: center; justify-content: center; background: var(--paper); overflow: hidden; padding: 20px 40px;">
+    <!-- TOP AREA: PICTURE FILLING MAXIMUM VERTICAL/HORIZONTAL ROOM -->
+    <div style="position: relative; flex: 1; display: flex; align-items: center; justify-content: center; background: var(--paper); overflow: hidden; padding: 10px;">
       
-      <!-- Nav Arrows -->
-      <button onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">◂</button>
+      <!-- Nav Arrows (Hidden on small mobile screens to prevent layout overlap) -->
+      <button class="modal-arrow" onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">◂</button>
       
-<!-- REPAIRED MODAL IMAGE FOR PHONE SWIPINGS -->
-<img id="modal-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid var(--line); user-select: none; -webkit-user-drag: none;">
+      <!-- Maximized Image: Switched to 98% space with drag protection -->
+      <img id="modal-img" src="" style="width: 98%; height: 98%; object-fit: contain; border: 1px solid var(--line); user-select: none; -webkit-user-drag: none; background: var(--paper);">
       
-      <button onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">▸</button>
+      <button class="modal-arrow" onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">▸</button>
     </div>
     
     <!-- BOTTOM AREA: SNAPPED TEXT CAPTION PANEL -->
-    <div id="modal-desc-panel" style="border-top: 1px solid var(--line); padding: 20px 24px 24px; font-size: 13px; line-height: 1.6; color: var(--ink); background: var(--paper); flex-shrink: 0; font-family: Arial, sans-serif; text-align: left;">
+    <div id="modal-desc-panel" style="border-top: 1px solid var(--line); padding: 16px 20px 20px; font-size: 13px; line-height: 1.6; color: var(--ink); background: var(--paper); flex-shrink: 0; font-family: Arial, sans-serif; text-align: left;">
       <!-- Text dynamically populates here -->
     </div>
     
   </div>
 </dialog>
+
+<!-- Small addition to your <style> tags to optimize phone layouts -->
+<style>
+  @media (max-width: 640px) {
+    .modal-arrow { display: none !important; } /* On phone, hide arrows to maximize space and rely 100% on touch swipes */
+    #photo-modal { width: 98vw !important; top: 12px !important; height: calc(100vh - 24px) !important; max-height: none !important; }
+    #modal-img { width: 100% !important; height: 100% !important; border: none !important; }
+  }
+</style>
+
 
 
 <!-- Add a small responsive rule to your CSS block for mobile viewing -->
