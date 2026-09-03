@@ -8,12 +8,8 @@
 
   /* ---------------------------------------------------------
      TOKENS
-     Paper-white ground, faint graph-paper grid (a nod to the
-     notebook the layout was sketched on), hairline black rules
-     doing all the structural work. Body copy is Arial only.
-     The site name is set in a monospace face — a field-notes /
-     survey-label register that fits sensing + architecture work
-     — and is the one typographic accent on the page.
+     Paper-white ground, faint graph-paper grid, hairline black
+     rules doing all the structural work. Arial throughout.
   --------------------------------------------------------- */
   :root{
     --paper:#fdfdfc;
@@ -29,15 +25,14 @@
   html,body{
     margin:0;
     padding:0;
+    color:var(--ink);
+    font-family:Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing:antialiased;
     background:var(--paper);
     background-image:
       linear-gradient(var(--grid) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid) 1px, transparent 1px);
     background-size:24px 24px;
-    color:var(--ink);
-    font-family:Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing:antialiased;
-    cursor: crosshair;
   }
 
   a{ color:inherit; }
@@ -48,10 +43,44 @@
     padding:0 20px 80px;
   }
 
-  /* outer frame — the "notebook box" the whole layout sits in */
+  /* outer border — a heavier boundary around the whole
+     composition, sitting 24px (one grid unit) out from the
+     frame so the grid pattern shows through the mat between
+     the two borders and continues into the page beyond it. */
+  .outer{
+    border:1px solid var(--line);
+    padding:0px;
+  }
+
+  /* frame — page margin (48px) and outer padding (24px) are
+     both multiples of the 24px grid pitch, so the frame's own
+     top edge still lands on a grid line even though the grid
+     itself now lives on the page background. Boxes touch (no
+     gap); each block controls only its own bottom border so
+     shared edges never double up into a thicker line — the
+     frame's own 1px border closes the top and the final
+     block's bottom. */
   .frame{
-    border:3px solid var(--line);
-    background:var(--paper);
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--line);
+  }
+
+  .frame > *{
+    border-bottom:1px solid var(--line);
+  }
+  .frame > *:last-child{
+    border-bottom:none;
+  }
+
+
+  /* shared type treatment for site name, subtitle, and project
+     titles — same face, size, weight and tracking throughout */
+  .sitename, .about-toggle span, .p-title-row{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    font-weight:400;
+    letter-spacing:1px;
   }
 
   /* ---------------------------------------------------------
@@ -61,25 +90,20 @@
     display:flex;
     align-items:baseline;
     justify-content:space-between;
-    border-bottom:1px solid var(--line);
-    padding:12px 24px;
+    padding:16px 24px;
   }
 
   .sitename{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:14px;
-    letter-spacing:1px;
     margin:0;
-    font-weight:00;
   }
 
   .email{
     font-size:14px;
     text-decoration:none;
     border-bottom:1px solid var(--ink);
-        letter-spacing:1px;
-        padding-bottom:1px;
-    cursor: cell;
+    letter-spacing:1px;
+    padding-bottom:1px;
+    cursor:pointer;
     white-space:nowrap;
   }
   .email:hover{ opacity:0.6; }
@@ -87,40 +111,25 @@
   /* ---------------------------------------------------------
      ABOUT (collapsible)
   --------------------------------------------------------- */
-  .about{
-    border-bottom:2px solid var(--line);
-  }
-
   .about-toggle{
     width:100%;
     display:flex;
     align-items:center;
     background:none;
     border:none;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:14px;
     color:var(--ink);
     padding:14px 24px;
-    cursor:cell;
-        letter-spacing:1px;text-align:left;
+    cursor:pointer;
+    text-align:left;
   }
   .about-toggle:hover{ background:var(--hover); }
-
-  .about-toggle .mark{
-    font-family:"Courier New", monospace;
-    font-size:1px;
-    transition:transform 0.18s ease;
-    display:inline-block;
-  }
-  .about.open .about-toggle .mark{ transform:rotate(90deg); }
 
   .about-body{
     max-height:0;
     overflow:hidden;
     transition:max-height 0.28s ease;
   }
- .about.open .about-body{ max-height: max-content; }
-.project.open .project-panel{ max-height: max-content; }
+  .about.open .about-body{ max-height:none; }
 
   .about-body p{
     margin:0;
@@ -129,138 +138,100 @@
     line-height:1.6;
   }
 
-  /* The main container boxes */
-.section-box {
-  border: 2px solid #000000;
-  padding: 18px 20px; /* Generous top/bottom and left/right padding */
-  box-sizing: border-box;
-}
-
-/* Project block layout to fix text vs image alignment */
-.project-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
-}
-
-.project-text-column {
-  max-width: 65%; /* Prevents text from crowding the image */
-}
-
-.project-title {
-  margin: 0 0 12px 0; /* Clean margin underneath the title */
-  font-weight: bold;
-}
-
-.project-description {
-  margin: 0;
-  line-height: 1.5; /* Improves text legibility on small screens */
-}
-
-
   /* ---------------------------------------------------------
-     PROJECT ROWS
+     PROJECT ROWS (2-column architectural system:
+     text expands fluidly, photo column locks at 280px)
   --------------------------------------------------------- */
-    /* ---------------------------------------------------------
-     PROJECT ROWS (CLEANED 2-COLUMN ARCHITECTURAL SYSTEM)
-  --------------------------------------------------------- */
-  .project{
-    border-bottom:1px solid var(--line);
+  .project-row{
+    display:grid;
+    grid-template-columns:1fr 280px;
+    width:100%;
+    background:none;
+    border:none;
+    cursor:pointer;
+    text-align:left;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink);
+    padding:0;
   }
-  .project:last-child{ border-bottom:none; }
+  .project-row:hover{ background:var(--hover); }
 
-  .project-row {
-    display: grid;
-    grid-template-columns: 1fr 280px; /* Left text side expands fluidly, photo column locks at 280px */
-    width: 100%;
-    background: none;
-    border: none;
-    cursor: cell;
-    text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--ink);
-    padding: 0;
-  }
-  .project-row:hover { background: var(--hover); }
-
-  /* Left Side Text Column Box: unified layout container handles all text components */
-  .project-info-block {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 24px; /* Clean interior spacing around the entire block */
-    background: transparent;
+  .project-info-block{
+    display:flex;
+    flex-direction:column;
+    padding:20px 24px;
+    background:transparent;
   }
 
-  /* Clear intermediate horizontal lines and margins completely */
-  .p-title-row, .p-location-row, .p-desc-row {
-    margin: 0;
-    padding: 0;
-    border: none !important; /* Forces the browser to strip away all intermediate borders */
-    line-height: 1.4;
+  .p-title-row, .p-desc-row{
+    margin:0;
+    padding:0;
+    line-height:1.4;
   }
 
-  .p-title-row { 
-    font-size: 14px; 
-    font-weight: normal;
-    margin-bottom: 4px; /* Tighter layout gap above the location line */
-  }
-  .p-title-row .mark { 
-    font-family: "Courier New", monospace;
-    margin-right: 6px; 
+  .p-title-row{
+    margin-bottom:8px;
   }
 
-  .p-location-row { 
-    font-size: 14px; 
-    color: var(--ink);
-    margin-bottom: 12px; /* Gives separation before the body copy paragraph starts */
+  .p-desc-row{
+    font-size:12px;
+    color:#333;
+    line-height:1.5;
   }
 
-  .p-desc-row { 
-    font-size: 12px; 
-    color: #333; 
-    line-height: 1.5;
+  /* right-side thumbnail — stretches edge to edge against the
+     row's own height, sharp vertical divider */
+  .p-thumb{
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    border-left:1px solid var(--line);
+    padding:0;
+    background:var(--paper);
+    overflow:hidden;
   }
 
-  /* Right Side Photo Column Container (Maximized & Edge-to-Edge) */
-  .p-thumb {
-    display: flex;
-    align-items: stretch; /* Stretches the image container to match the height of your text */
-    justify-content: center;
-    border-left: 1px solid var(--line); /* Simple, sharp vertical layout split rule */
-    padding: 0; 
-    background: var(--paper);
-    overflow: hidden; 
-  }
-  
-  .p-thumb img.ph {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Fills its grid area without stretching or losing ratio properties */
-    border: none;
-    display: block;
+  .p-thumb img.ph{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border:none;
+    display:block;
   }
 
-  /* Expanded Panel Container */
+  /* expanded panel */
   .project-panel{
     max-height:0;
     overflow:hidden;
     transition:max-height 0.32s ease;
     border-top:1px solid var(--line-soft);
   }
-  .project.open .project-panel { 
-    max-height: none; /* Allows panel view layout to safely expand infinitely */
-  }
+  .project.open .project-panel{ max-height:none; }
 
   .panel-inner{
     padding:22px 24px 28px;
   }
 
-  .panel-photos {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    margin-bottom: 24px; 
+  .panel-photos{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+    margin-bottom:24px;
+  }
+
+  .photo-group-wrapper img.ph{
+    width:100%;
+    display:block;
+    border:1px solid var(--line);
+    cursor:zoom-in;
+    margin-bottom:8px;
+  }
+  .photo-group-wrapper p{
+    font-size:12px;
+    line-height:1.5;
+    color:#555;
+    margin:0;
+    padding:0 4px;
   }
 
   .panel-text{
@@ -271,7 +242,6 @@
   }
   .panel-text p{ margin:0 0 12px; }
   .panel-text p:last-child{ margin-bottom:0; }
-
 
   /* ---------------------------------------------------------
      FOOTER NOTE
@@ -288,24 +258,16 @@
      RESPONSIVE
   --------------------------------------------------------- */
   @media (max-width:640px){
-  .project-row{
-    grid-template-columns:1fr;
+    .project-row{
+      grid-template-columns:1fr 100px;
+    }
+    .p-title-row{ margin-bottom:6px; }
+    .panel-photos{ gap:16px; }
+    .header{ flex-direction:column; align-items:flex-start; gap:8px; }
+    .modal-arrow{ display:none !important; }
+    #photo-modal{ width:98vw !important; top:12px !important; height:calc(100vh - 24px) !important; max-height:none !important; }
+    #modal-img{ width:100% !important; height:100% !important; border:none !important; }
   }
-  .p-name, .p-text, .p-thumb{
-    border-right:none;
-    border-bottom:1px solid var(--line-soft);
-  }
-  .p-thumb{ border-bottom:none; max-width:160px; }
-  
-  /* Update this line */
-  .panel-photos{ 
-    grid-template-columns: 1fr; 
-    gap: 16px; /* slightly smaller gap looks more cohesive on phone viewports */
-  }
-  
-  .header{ flex-direction:column; align-items:flex-start; gap:8px; }
-}
-
 
   /* keyboard focus visibility */
   button:focus-visible{
@@ -314,7 +276,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .about-body, .project-panel, .mark{ transition:none !important; }
+    .about-body, .project-panel{ transition:none !important; }
   }
 
 </style>
@@ -322,6 +284,7 @@
 <body>
 
 <div class="page">
+  <div class="outer">
   <div class="frame">
 
     <!-- HEADER -->
@@ -333,95 +296,172 @@
     <!-- ABOUT -->
     <div class="about" id="about">
       <button class="about-toggle" onclick="toggleAbout()">
-        <span class="mark">&#9656;</span>
         <span>architect and researcher in London, UK</span>
       </button>
       <div class="about-body">
         <p>
-          <br>His practice moves between design and research with technical tools, DIY something, and investigative research.
+          His practice moves between design and research with technical tools, DIY something, and investigative research.
         </p>
       </div>
     </div>
 
     <!-- PROJECTS -->
-<button class="project-row" onclick="toggleProject('proj-1')">
-  
-  <!-- LEFT SIDE COLUMN: A single text container with zero interior sub-rows -->
-<!-- REPAIRED UNIFORM TEXT BLOCK -->
-<div class="project-info-block">
-  <!-- The collapse arrow mark has been completely removed from this heading row -->
-  <div class="p-title-row">Passive Straw House</div>
-  <div class="p-location-row"></div>
-  <div class="p-desc-row">
-    A climate friendly house equipped with photovoltaics, radiant heating and cooling, and active ventilation.
-  </div>
-</div>
 
-  
-  <!-- RIGHT SIDE COLUMN: Thumbnail Image Container -->
-  <div class="p-thumb">
-    <img class="ph" src="images/2-gz-12.jpg" alt="Passive Straw House exterior">
-  </div>
-
-</button>
-
-  
-  <div class="project-panel">
-    <div class="panel-inner">
-
-      <div class="panel-photos" id="photos-proj-1">
-  
-        <!-- IMAGE BLOCK 1 -->
-        <div class="photo-group-wrapper" style="margin-bottom: 28px;">
-          <img class="ph ph-sm" src="images/2-gz-1.jpg" alt="Photo 1" 
-               data-desc="01 // FIELD DEPLOYMENT — The low-cost sensor housing attached to the central structural columns along the active transit line, recording ambient noise levels and temperature variations over an integrated 24-hour cycle."
-               onclick="openZoom('photos-proj-1', 0)" style="cursor:zoom-in; margin-bottom: 8px;">
-          <p style="font-size: 12px; line-height: 1.5; color: #555; margin: 0; padding: 0 4px;">01 // FIELD DEPLOYMENT — The low-cost sensor housing attached to the central structural columns along the active transit line, recording ambient noise levels and temperature variations over an integrated 24-hour cycle.</p>
+    <!-- Project 1 -->
+    <div class="project" id="proj-1">
+      <button class="project-row" onclick="toggleProject('proj-1')">
+        <div class="project-info-block">
+          <div class="p-title-row">Passive Straw House</div>
+          <div class="p-desc-row">
+            A climate friendly house equipped with photovoltaics, radiant heating and cooling, and active ventilation.
+          </div>
         </div>
-       
-  <!-- IMAGE BLOCK 2 -->
-  <div class="photo-group-wrapper" style="margin-bottom: 28px;">
-    <img class="ph ph-sm" src="images/2-gz-2.jpg" alt="Photo 2" 
-         data-desc="02 // SPATIAL MAPPING — GIS visualization layout showing the cross-referenced particulate data mapped directly against the train schedule intervals to isolate deceleration peaks."
-         onclick="openZoom('photos-proj-1', 1)" style="cursor:zoom-in; margin-bottom: 8px;">
-    <p style="font-size: 12px; line-height: 1.5; color: #555; margin: 0; padding: 0 4px;">02 // SPATIAL MAPPING — GIS visualization layout showing the cross-referenced particulate data mapped directly against the train schedule intervals to isolate deceleration peaks.</p>
-  </div>
-       
-  <!-- IMAGE BLOCK 3 -->
-  <div class="photo-group-wrapper" style="margin-bottom: 12px;">
-    <img class="ph ph-sm" src="images/2-gz-3.jpg" alt="Photo 3" 
-         data-desc="03 // PROTOTYPE TESTING — Laboratory calibration phase tracking sensor drift against professional reference hardware prior to long-term underground field positioning."
-         onclick="openZoom('photos-proj-1', 2)" style="cursor:zoom-in; margin-bottom: 8px;">
-    <p style="font-size: 12px; line-height: 1.5; color: #555; margin: 0; padding: 0 4px;">03 // PROTOTYPE TESTING — Laboratory calibration phase tracking sensor drift against professional reference hardware prior to long-term underground field positioning.</p>
-  </div>
-</div>
+        <div class="p-thumb">
+          <img class="ph" src="images/2-gz-12.jpg" alt="Passive Straw House exterior">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-1">
 
-        <!-- Add Image Block 2 and 3 sequentially below here when ready -->
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz-1.jpg" alt="Photo 1"
+                   data-desc="01 // FIELD DEPLOYMENT — The low-cost sensor housing attached to the central structural columns along the active transit line, recording ambient noise levels and temperature variations over an integrated 24-hour cycle."
+                   onclick="openZoom('photos-proj-1', 0)">
+              <p>01 // FIELD DEPLOYMENT — The low-cost sensor housing attached to the central structural columns along the active transit line, recording ambient noise levels and temperature variations over an integrated 24-hour cycle.</p>
+            </div>
 
-      </div> <!-- End panel-photos -->
-    </div> <!-- End panel-inner -->
-  </div> <!-- End project-panel -->
-</div> <!-- End Project 1 Container -->
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz-2.jpg" alt="Photo 2"
+                   data-desc="02 // SPATIAL MAPPING — GIS visualization layout showing the cross-referenced particulate data mapped directly against the train schedule intervals to isolate deceleration peaks."
+                   onclick="openZoom('photos-proj-1', 1)">
+              <p>02 // SPATIAL MAPPING — GIS visualization layout showing the cross-referenced particulate data mapped directly against the train schedule intervals to isolate deceleration peaks.</p>
+            </div>
 
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz-3.jpg" alt="Photo 3"
+                   data-desc="03 // PROTOTYPE TESTING — Laboratory calibration phase tracking sensor drift against professional reference hardware prior to long-term underground field positioning."
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>03 // PROTOTYPE TESTING — Laboratory calibration phase tracking sensor drift against professional reference hardware prior to long-term underground field positioning.</p>
+            </div>
 
+          </div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 (placeholder — fill in title, description, and images/proj2-*.jpg) -->
+    <div class="project" id="proj-2">
+      <button class="project-row" onclick="toggleProject('proj-2')">
+        <div class="project-info-block">
+          <div class="p-title-row">Project Title</div>
+          <div class="p-desc-row">
+            One-line description of the project goes here.
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/proj2-lead.jpg" alt="Project 2 lead photo">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-2">
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/proj2-01.jpg" alt="Photo 1"
+                   data-desc="Caption for photo 1."
+                   onclick="openZoom('photos-proj-2', 0)">
+              <p>Caption for photo 1.</p>
+            </div>
+          </div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 (placeholder — fill in title, description, and images/proj3-*.jpg) -->
+    <div class="project" id="proj-3">
+      <button class="project-row" onclick="toggleProject('proj-3')">
+        <div class="project-info-block">
+          <div class="p-title-row">Project Title</div>
+          <div class="p-desc-row">
+            One-line description of the project goes here.
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/proj3-lead.jpg" alt="Project 3 lead photo">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-3">
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/proj3-01.jpg" alt="Photo 1"
+                   data-desc="Caption for photo 1."
+                   onclick="openZoom('photos-proj-3', 0)">
+              <p>Caption for photo 1.</p>
+            </div>
+          </div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 (placeholder — fill in title, description, and images/proj4-*.jpg) -->
+    <div class="project" id="proj-4">
+      <button class="project-row" onclick="toggleProject('proj-4')">
+        <div class="project-info-block">
+          <div class="p-title-row">Project Title</div>
+          <div class="p-desc-row">
+            One-line description of the project goes here.
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/proj4-lead.jpg" alt="Project 4 lead photo">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-4">
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/proj4-01.jpg" alt="Photo 1"
+                   data-desc="Caption for photo 1."
+                   onclick="openZoom('photos-proj-4', 0)">
+              <p>Caption for photo 1.</p>
+            </div>
+          </div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- /PROJECTS -->
 
+  </div>
+  </div>
 
- <p class="foot">(click a section to expand)</p>
+  <p class="foot">(click a section to expand)</p>
+</div>
 
-<!-- UPDATED SCRIPT ENGINE WITH TOUCH GESTURES -->
+<!-- LIGHTBOX / SLIDESHOW MODAL -->
+<dialog id="photo-modal" onclick="if(event.target === this) this.close()" style="border:3px solid var(--line); background:var(--paper); padding:0; position:fixed; top:48px; left:50%; transform:translateX(-50%); margin:0; width:95vw; max-width:1400px; height:calc(100vh - 96px); max-height:880px; z-index:9999; outline:none; box-shadow:0 20px 50px rgba(0,0,0,0.15);">
+  <div style="display:flex; flex-direction:column; width:100%; height:100%; position:relative;">
+    <div style="position:relative; flex:1; display:flex; align-items:center; justify-content:center; background:var(--paper); overflow:hidden; padding:10px;">
+      <button class="modal-arrow" onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9668;</button>
+      <img id="modal-img" src="" style="width:98%; height:98%; object-fit:contain; border:1px solid var(--line); user-select:none; -webkit-user-drag:none; background:var(--paper);">
+      <button class="modal-arrow" onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9658;</button>
+    </div>
+    <div id="modal-desc-panel" style="border-top:1px solid var(--line); padding:16px 20px 20px; font-size:13px; line-height:1.6; color:var(--ink); background:var(--paper); flex-shrink:0; font-family:Arial, sans-serif; text-align:left;"></div>
+  </div>
+</dialog>
+
 <script>
-  // Global memory tracks for the active slideshow array
   let activeImageSet = [];
   let activeImageIndex = 0;
-
-  // Touch tracking variables
   let touchStartX = 0;
   let touchEndX = 0;
 
-  // 1. PROJECT ROW ACCORDION
-  function toggleProject(id) {
+  function toggleProject(id){
     const targetProject = document.getElementById(id);
     if (!targetProject) return;
     const isAlreadyOpen = targetProject.classList.contains('open');
@@ -429,218 +469,79 @@
     if (!isAlreadyOpen) targetProject.classList.add('open');
   }
 
-  // 2. ABOUT AREA ACCORDION
-  function toggleAbout() {
+  function toggleAbout(){
     const aboutBox = document.getElementById('about');
     if (aboutBox) aboutBox.classList.toggle('open');
   }
 
-  // 3. SLIDESHOW INITIALIZER
-  function openZoom(groupId, indexPosition) {
+  function openZoom(groupId, indexPosition){
     const container = document.getElementById(groupId);
     if (!container) return;
-
     activeImageSet = Array.from(container.querySelectorAll('img'));
     activeImageIndex = indexPosition;
-
     renderActiveModalPhoto();
     document.getElementById('photo-modal').showModal();
   }
 
-  // 4. SHIFT ACTION CONTROLLER
-  function shiftPhoto(direction) {
+  function shiftPhoto(direction){
     if (activeImageSet.length === 0) return;
-    
     activeImageIndex += direction;
-
     if (activeImageIndex >= activeImageSet.length) activeImageIndex = 0;
     if (activeImageIndex < 0) activeImageIndex = activeImageSet.length - 1;
-
     renderActiveModalPhoto();
   }
 
-  function renderActiveModalPhoto() {
+  function renderActiveModalPhoto(){
     const nextImgAsset = activeImageSet[activeImageIndex];
     const targetModalFrame = document.getElementById('modal-img');
     const targetDescPanel = document.getElementById('modal-desc-panel');
-    
-    if (nextImgAsset && targetModalFrame && targetDescPanel) {
+    if (nextImgAsset && targetModalFrame && targetDescPanel){
       targetModalFrame.src = nextImgAsset.src;
-      
       const descriptionText = nextImgAsset.getAttribute('data-desc');
       targetDescPanel.innerHTML = descriptionText ? descriptionText : "<i>No description provided.</i>";
     }
   }
 
-   // 5. BULLETPROOF DIRECT IMAGE TOUCH SWIPE ENGINE
-  document.addEventListener('DOMContentLoaded', function() {
-    const targetImageNode = document.getElementById('modal-img');
-    
-    if (targetImageNode) {
-      // Binds listeners directly on the image surface
-      targetImageNode.addEventListener('touchstart', function(event) {
-        touchStartX = event.changedTouches[0].clientX; // Capture exact first point
-      }, { passive: true });
-
-      targetImageNode.addEventListener('touchend', function(event) {
-        touchEndX = event.changedTouches[0].clientX; // Capture exact exit point
-        handleSwipeGesture();
-      }, { passive: true });
-    }
-  });
-
-  function handleSwipeGesture() {
-    const swipeThreshold = 30; // Low threshold means effortless, snappy flicking on phones
+  function handleSwipeGesture(){
+    const swipeThreshold = 40;
     const totalSwipeDistance = touchEndX - touchStartX;
-
     const modalElement = document.getElementById('photo-modal');
-    // Ensure gesture only runs if the overlay is active
-    if (modalElement && modalElement.open && Math.abs(totalSwipeDistance) > swipeThreshold) {
-      if (totalSwipeDistance < 0) {
-        shiftPhoto(1);  // Flick Left -> Load Next Image
-      } else {
-        shiftPhoto(-1); // Flick Right -> Load Previous Image
-      }
-    }
-  }
-
-
-  function handleSwipeGesture() {
-    const swipeThreshold = 40; // Reduced pixels for snappier mobile flicking responses
-    const totalSwipeDistance = touchEndX - touchStartX;
-
-    // Execute transitions only if the modal dialog overlay window is actively open
-    const modalElement = document.getElementById('photo-modal');
-    if (modalElement && modalElement.open && Math.abs(totalSwipeDistance) > swipeThreshold) {
-      if (totalSwipeDistance < 0) {
-        // Swiped Left -> Advance to next photo asset
+    if (modalElement && modalElement.open && Math.abs(totalSwipeDistance) > swipeThreshold){
+      if (totalSwipeDistance < 0){
         shiftPhoto(1);
       } else {
-        // Swiped Right -> Return to previous photo asset
         shiftPhoto(-1);
       }
     }
   }
 
+  document.addEventListener('DOMContentLoaded', function(){
+    const targetImageNode = document.getElementById('modal-img');
+    if (targetImageNode){
+      targetImageNode.addEventListener('touchstart', function(event){
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive:true });
+      targetImageNode.addEventListener('touchend', function(event){
+        touchEndX = event.changedTouches[0].clientX;
+        handleSwipeGesture();
+      }, { passive:true });
+    }
+  });
 
-  // 6. GLOBAL KEYBOARD ACCESSIBILITY LISTENERS
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function(event){
     const modalElement = document.getElementById('photo-modal');
-    if (modalElement && modalElement.open) {
-      if (event.key === 'ArrowRight') {
+    if (modalElement && modalElement.open){
+      if (event.key === 'ArrowRight'){
         event.preventDefault();
         shiftPhoto(1);
       }
-      if (event.key === 'ArrowLeft') {
+      if (event.key === 'ArrowLeft'){
         event.preventDefault();
         shiftPhoto(-1);
       }
     }
   });
 </script>
-
-
-
-<!-- BOTTOM-TEXT POPUP VIEW FRAME (MAXIMIZED & SWIPE-READY) -->
-<dialog id="photo-modal" onclick="if(event.target === this) this.close()" style="border:3px solid var(--line); background:var(--paper); padding:0; position:fixed; top:48px; left:50%; transform:translateX(-50%); margin:0; width:95vw; max-width:1400px; height:calc(100vh - 96px); max-height:880px; z-index:9999; outline:none; box-shadow: 0 20px 50px rgba(0,0,0,0.15);">
-  
-  <div style="display: flex; flex-direction: column; width: 100%; height: 100%; position: relative;">
-    
-    <!-- TOP AREA: PICTURE FILLING MAXIMUM VERTICAL/HORIZONTAL ROOM -->
-    <div style="position: relative; flex: 1; display: flex; align-items: center; justify-content: center; background: var(--paper); overflow: hidden; padding: 10px;">
-      
-      <!-- Nav Arrows (Hidden on small mobile screens to prevent layout overlap) -->
-      <button class="modal-arrow" onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">◂</button>
-      
-      <!-- Maximized Image: Switched to 98% space with drag protection -->
-      <img id="modal-img" src="" style="width: 98%; height: 98%; object-fit: contain; border: 1px solid var(--line); user-select: none; -webkit-user-drag: none; background: var(--paper);">
-      
-      <button class="modal-arrow" onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">▸</button>
-    </div>
-    
-    <!-- BOTTOM AREA: SNAPPED TEXT CAPTION PANEL -->
-    <div id="modal-desc-panel" style="border-top: 1px solid var(--line); padding: 16px 20px 20px; font-size: 13px; line-height: 1.6; color: var(--ink); background: var(--paper); flex-shrink: 0; font-family: Arial, sans-serif; text-align: left;">
-      <!-- Text dynamically populates here -->
-    </div>
-    
-  </div>
-</dialog>
-
-<!-- Small addition to your <style> tags to optimize phone layouts -->
-<style>
-  /* ---------------------------------------------------------
-     RESPONSIVE (MOBILE OVERRIDES)
-  --------------------------------------------------------- */
-  @media (max-width:640px){
-    /* 1. SHRINK PHOTO SLOT ON PHONE GLASS TO GIVE TEXT THE DOMINANT WEIGHT */
-    .project-row {
-      grid-template-columns: 1fr 100px; /* Text expands to fill screen, photo drops down to a clean 100px */
-    }
-
-    /* 2. COMPACT PADDING FOR NARROW VIEWS */
-   /* ---------------------------------------------------------
-     UPDATED TEXT BLOCK STYLING (Lines Removed)
-  --------------------------------------------------------- */
-  .p-title-row, .p-location-row, .p-desc-row {
-    padding: 12px 20px;
-    border-bottom: none; /* CHANGED: Removes the intermediate separator lines completely */
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  
-  .p-title-row { 
-    font-family: Arial, Helvetica, sans-serif; /* Matches the site name face register */
-    font-size: 14px;                           /* Scales the font down to match logo branding */
-    letter-spacing: 1px;                       /* Tracking variable matched perfectly to header */
-    font-weight: normal;                       /* Sets crisp, lightweight token weight lines */
-    margin-bottom: 6px;                        /* Controlled typography spacing down the column */
-  }
-
-  
-  .p-title-row .mark { 
-    font-family: "Courier New", monospace; 
-    margin-right: 6px; 
-  }
-  
-  .p-location-row { 
-    font-size: 15px; 
-    color: var(--ink);
-    padding-top: 0;   /* Pulls location cleanly up near the title */
-    padding-bottom: 8px; 
-  }
-  
-  .p-desc-row { 
-    font-size: 12px; 
-    color: #333; 
-    line-height: 1.5;
-    padding-top: 4px;  /* Spacing before the description body paragraph starts */
-    padding-bottom: 16px; /* Spacing at the absolute bottom of the row */
-  }
-
-
-    /* 3. ENSURE MOBILE ACCORDION MODAL ZOOM STAYS EXTRA SNAP-READY */
-    .modal-arrow { display: none !important; }
-    #photo-modal { width: 98vw !important; top: 12px !important; height: calc(100vh - 24px) !important; max-height: none !important; }
-    #modal-img { width: 100% !important; height: 100% !important; border: none !important; }
-    
-    .header { flex-direction: column; align-items: flex-start; gap: 8px; }
-  }
-
-
-</style>
-
-
-
-<!-- Add a small responsive rule to your CSS block for mobile viewing -->
-<style>
-  @media (max-width: 768px) {
-    #photo-modal > div { grid-template-columns: 1fr !important; grid-template-rows: 2fr 1fr; }
-    #modal-desc-panel { border-left: none !important; border-top: 1px solid var(--line); padding: 20px 16px !important; }
-  }
-</style>
-
-
-
 
 </body>
 </html>
