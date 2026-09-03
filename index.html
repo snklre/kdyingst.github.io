@@ -179,12 +179,15 @@
     line-height:1.5;
   }
 
-  /* right-side thumbnail — stretches edge to edge against the
-     row's own height, sharp vertical divider */
+  /* right-side thumbnail — position:relative + an absolutely
+     positioned, inset:0 image is used instead of percentage
+     height, since percentage-height children of a stretched
+     grid item are unreliable in Safari; this guarantees the
+     photo always fills the row's full height edge to edge,
+     cropping via object-fit, with no gaps in the container. */
   .p-thumb{
-    display:flex;
-    align-items:stretch;
-    justify-content:center;
+    position:relative;
+    align-self:stretch;
     border-left:1px solid var(--line);
     padding:0;
     background:var(--paper);
@@ -192,6 +195,8 @@
   }
 
   .p-thumb img.ph{
+    position:absolute;
+    inset:0;
     width:100%;
     height:100%;
     object-fit:cover;
@@ -263,7 +268,6 @@
     }
     .p-title-row{ margin-bottom:6px; }
     .panel-photos{ gap:16px; }
-    .header{ flex-direction:column; align-items:flex-start; gap:8px; }
     .modal-arrow{ display:none !important; }
     #photo-modal{ width:98vw !important; top:12px !important; height:calc(100vh - 24px) !important; max-height:none !important; }
     #modal-img{ width:100% !important; height:100% !important; border:none !important; }
