@@ -38,9 +38,9 @@
   a{ color:inherit; }
 
   .page{
-    max-width:900px;
+    max-width:888px;
     margin:48px auto;
-    padding:0 20px 80px;
+    padding:0 24px 80px;
   }
 
   /* outer border — a heavier boundary around the whole
@@ -55,15 +55,18 @@
   /* frame — page margin (48px) and outer padding (24px) are
      both multiples of the 24px grid pitch, so the frame's own
      top edge still lands on a grid line even though the grid
-     itself now lives on the page background. Boxes touch (no
-     gap); each block controls only its own bottom border so
-     shared edges never double up into a thicker line — the
-     frame's own 1px border closes the top and the final
-     block's bottom. */
+     itself now lives on the page background. A solid fill hides
+     the grid behind the actual content (kept only in the mat
+     around the frame and beyond) while the frame's corners
+     still snap to it. Boxes touch (no gap); each block controls
+     only its own bottom border so shared edges never double up
+     into a thicker line — the frame's own 1px border closes the
+     top and the final block's bottom. */
   .frame{
     display:flex;
     flex-direction:column;
     border:1px solid var(--line);
+    background:var(--paper);
   }
 
   .frame > *{
@@ -464,6 +467,34 @@
   let activeImageIndex = 0;
   let touchStartX = 0;
   let touchEndX = 0;
+
+  /* GRID SNAP — .page is centered with auto margins, so its
+     natural left offset is whatever's left over from the
+     viewport width and isn't guaranteed to land on a 24px grid
+     line. This measures the actual visible left edge of the
+     outer border, rounds it to the nearest grid line, and
+     nudges the page's own margin to close the gap — so the
+     frame's corners snap to the grid at any window width. */
+  function snapPageToGrid(){
+    const page = document.querySelector('.page');
+    const outer = document.querySelector('.outer');
+    if (!page || !outer) return;
+    const GRID = 24;
+    page.style.marginLeft = '';
+    const naturalLeft = outer.getBoundingClientRect().left;
+    const snappedLeft = Math.round(naturalLeft / GRID) * GRID;
+    const delta = snappedLeft - naturalLeft;
+    if (Math.abs(delta) > 0.5){
+      const naturalMarginLeft = parseFloat(getComputedStyle(page).marginLeft) || 0;
+      page.style.marginLeft = (naturalMarginLeft + delta) + 'px';
+    }
+  }
+  window.addEventListener('load', snapPageToGrid);
+  let snapResizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(snapResizeTimer);
+    snapResizeTimer = setTimeout(snapPageToGrid, 100);
+  });
 
   function toggleProject(id){
     const targetProject = document.getElementById(id);
