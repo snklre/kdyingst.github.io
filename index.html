@@ -3,114 +3,428 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KEVIN YINGST</title>
-<link rel="stylesheet" href="styles.css">
+<title>kevin yingst</title>
+<style>
+
+  /* ---------------------------------------------------------
+     TOKENS
+     Paper-white ground, faint graph-paper grid (a nod to the
+     notebook the layout was sketched on), hairline black rules
+     doing all the structural work. Body copy is Arial only.
+     The site name is set in a monospace face — a field-notes /
+     survey-label register that fits sensing + architecture work
+     — and is the one typographic accent on the page.
+  --------------------------------------------------------- */
+  :root{
+    --paper:#fdfdfc;
+    --ink:#111111;
+    --line:#111111;
+    --line-soft:#cfcfcc;
+    --grid:#e7e7e3;
+    --hover:#00000010;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:24px 24px;
+    color:var(--ink);
+    font-family:Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    cursor: crosshair;
+  }
+
+  a{ color:inherit; }
+
+  .page{
+    max-width:900px;
+    margin:48px auto;
+    padding:0 20px 80px;
+  }
+
+  /* outer frame — the "notebook box" the whole layout sits in */
+  .frame{
+    border:3px solid var(--line);
+    background:var(--paper);
+  }
+
+  /* ---------------------------------------------------------
+     HEADER
+  --------------------------------------------------------- */
+  .header{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    padding:12px 24px;
+  }
+
+  .sitename{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:14px;
+    letter-spacing:1px;
+    margin:0;
+    font-weight:00;
+  }
+
+  .email{
+    font-size:14px;
+    text-decoration:none;
+    border-bottom:1px solid var(--ink);
+        letter-spacing:1px;
+        padding-bottom:1px;
+    cursor: cell;
+    white-space:nowrap;
+  }
+  .email:hover{ opacity:0.6; }
+
+  /* ---------------------------------------------------------
+     ABOUT (collapsible)
+  --------------------------------------------------------- */
+  .about{
+    border-bottom:2px solid var(--line);
+  }
+
+  .about-toggle{
+    width:100%;
+    display:flex;
+    align-items:center;
+    background:none;
+    border:none;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    padding:14px 24px;
+    cursor:cell;
+        letter-spacing:1px;text-align:left;
+  }
+  .about-toggle:hover{ background:var(--hover); }
+
+  .about-toggle .mark{
+    font-family:"Courier New", monospace;
+    font-size:1px;
+    transition:transform 0.18s ease;
+    display:inline-block;
+  }
+  .about.open .about-toggle .mark{ transform:rotate(90deg); }
+
+  .about-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.28s ease;
+  }
+  .about.open .about-body{ max-height:260px; }
+
+  .about-body p{
+    margin:0;
+    padding:0 24px 20px;
+    font-size:12px;
+    line-height:1.6;
+  }
+
+  /* ---------------------------------------------------------
+     PROJECT ROWS
+  --------------------------------------------------------- */
+  .project{
+    border-bottom:1px solid var(--line);
+  }
+  .project:last-child{ border-bottom:none; }
+
+  .project-row{
+    display:grid;
+    grid-template-columns:150px 1fr 200px;
+    width:100%;
+    background:none;
+    border:none;
+    cursor:cell;
+    text-align:left;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink);
+    padding:0;
+  }
+  .project-row:hover{ background:var(--hover); }
+
+  .p-name, .p-text, .p-thumb{
+    padding:12px;
+    border-right:1px solid;
+  }
+  .p-thumb{ border-right:none; }
+
+  .p-name{
+    font-size:18px;
+    font-weight:300;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .p-name .mark{
+    font-family:"Courier New", monospace;
+    font-size:1px;
+    transition:transform 0.18s ease;
+    flex:none;
+  }
+  .project.open .p-name .mark{ transform:rotate(90deg); }
+
+  .p-text{
+    font-size:12px;
+    line-height:1.2;
+    color:#030303;
+    display:flex;
+    align-items:center;
+  }
+
+  .p-thumb{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* photo placeholder — crossed box, same mark used in the sketch.
+     Replace with: <img src="your-photo.jpg" alt="..."> */
+  .ph{
+    width:100%;
+    aspect-ratio:4/3;
+    border:1px solid var(--line);
+    position:relative;
+    background:var(--paper);
+  }
+  .ph::before, .ph::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(to top right, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px)),
+      linear-gradient(to top left, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px));
+  }
+  .ph-sm{ aspect-ratio:4/3; }
+
+  /* expanded panel */
+  .project-panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.32s ease;
+    border-top:1px solid var(--line-soft);
+  }
+  .project.open .project-panel{ max-height:900px; }
+
+  .panel-inner{
+    padding:22px 24px 28px;
+  }
+
+  .panel-photos{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin-bottom:18px;
+  }
+
+  .panel-text{
+    font-size:14px;
+    line-height:1.65;
+    max-width:70ch;
+    color:#222;
+  }
+  .panel-text p{ margin:0 0 12px; }
+  .panel-text p:last-child{ margin-bottom:0; }
+
+  /* ---------------------------------------------------------
+     FOOTER NOTE
+  --------------------------------------------------------- */
+  .foot{
+    font-size:11px;
+    color:#999;
+    text-align:center;
+    margin-top:18px;
+    letter-spacing:0.3px;
+  }
+
+  /* ---------------------------------------------------------
+     RESPONSIVE
+  --------------------------------------------------------- */
+  @media (max-width:640px){
+    .project-row{
+      grid-template-columns:1fr;
+    }
+    .p-name, .p-text, .p-thumb{
+      border-right:none;
+      border-bottom:1px solid var(--line-soft);
+    }
+    .p-thumb{ border-bottom:none; max-width:160px; }
+    .panel-photos{ grid-template-columns:1fr 1fr; }
+    .header{ flex-direction:column; align-items:flex-start; gap:8px; }
+  }
+
+  /* keyboard focus visibility */
+  button:focus-visible{
+    outline:2px solid var(--ink);
+    outline-offset:-2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .about-body, .project-panel, .mark{ transition:none !important; }
+  }
+
+</style>
 </head>
 <body>
-<div class="frame">
 
-  <div class="hero">
-    <img class="hero-img" src="images/portrait.jpg" alt="Kevin Yingst">
-    <div class="hero-scrim"></div>
-    <div class="hero-tag mono"></div>
-    <div class="hero-name">
-    </div>
-  </div>
+<div class="page">
+  <div class="frame">
 
-  <div class="topbar nav-only">
-    <div class="nav-row">
+    <!-- HEADER -->
+    <div class="header">
+      <p class="sitename">Kevin Yingst</p>
+      <a class="email" href="mailto:kevinyingstdesign@gmail.com">Email</a>
     </div>
-  </div>  <div class="topbar">
-    <div class="num mono">000</div>
-    <div class="nav-row">
-        <div class="site-name">Kevin Yingst
-  </div>
-  
-      <nav>
-        <a href="about.html">About</a>
-        <a href="contact.html">Email</a>
-      </nav>
-    </div>
-  </div>
-  
-  <div class="toc-section-label"> </div>
-  <div class="report" style="margin-bottom: 40px;">
 
-    <a class="toc-row" href="underground-sensing.html">
-      <div class="row">
-        <div class="num mono">001</div>
-        <div class="content">
-          <div>
-            <div class="toc-title">Underground Sensing</div>
+    <!-- ABOUT -->
+    <div class="about" id="about">
+      <button class="about-toggle" onclick="toggleAbout()">
+        <span class="mark">&#9656;</span>
+        <span>architect and researcher in London, UK</span>
+      </button>
+      <div class="about-body">
+        <p>
+          <br>His practice moves between design and research with technical tools, DIY something, and investigative research.
+        </p>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="projects">
+
+      <div class="project" id="proj-1">
+        <button class="project-row" onclick="toggleProject('proj-1')">
+          <span class="p-name"><span class="mark">&#9656;</span>Underground Sensing</span>
+          <span class="p-text">Low-cost air, noise and temperature sensors deployed along a transit line to map exposure over time.</span>
+          <span class="p-thumb"><span class="ph"></span></span>
+        </button>
+        <div class="project-panel">
+          <div class="panel-inner">
+            <div class="panel-photos">
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+            </div>
+            <div class="panel-text">
+              <p>Replace this paragraph with the full project write-up. A short set of
+              sensor nodes recorded particulate matter, noise levels and temperature
+              along a section of underground line, logging continuously over several
+              weeks to build a picture of conditions commuters actually experience.</p>
+              <p>Swap each &lt;span class="ph"&gt; placeholder above for an
+              &lt;img src="..."&gt; tag pointing at your own photo.</p>
+            </div>
           </div>
-          <div class="toc-meta">research + computing</div>
         </div>
       </div>
-    </a>
 
-    <a class="toc-row" href="straw-panel-house.html">
-      <div class="row">
-        <div class="num mono">002</div>
-        <div class="content">
-          <div class="toc-title">Straw Panel House
-           performance architecture</div>
-<div class="placeholder-img">project image<br><span class="placeholder-note">replace with photo</span></div>
+      <div class="project" id="proj-2">
+        <button class="project-row" onclick="toggleProject('proj-2')">
+          <span class="p-name"><span class="mark">&#9656;</span>Passive Straw House</span>
+          <span class="p-text">A low-carbon housing prototype built from compressed straw panels, developed with a local building team.</span>
+          <span class="p-thumb"><span class="ph"></span></span>
+        </button>
+        <div class="project-panel">
+          <div class="panel-inner">
+            <div class="panel-photos">
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+            </div>
+            <div class="panel-text">
+              <p>A house made of climate friendly materials for a family. It combines novel use of panelized straw, highly-insulated windows, thermal mass panels, with smart energy systems like radiant heating/cooling and photovoltaic arrays large enough to power the home, charge the cars, and sell back to the grid. </p>
+            </div>
+          </div>
         </div>
       </div>
-    </a>
 
-
-    
-    <a class="toc-row" href="sierra-straw-house.html">
-      <div class="row">
-        <div class="num mono">003</div>
-        <div class="content">
-          <div class="toc-title">Sierra Straw House</div>
-          <div class="toc-meta">natural materials</div>
+      <div class="project" id="proj-3">
+        <button class="project-row" onclick="toggleProject('proj-3')">
+          <span class="p-name"><span class="mark">&#9656;</span>Sierra Straw House</span>
+          <span class="p-text">A second straw-construction house sited in the sierra, testing the method at higher altitude.</span>
+          <span class="p-thumb"><span class="ph"></span></span>
+        </button>
+        <div class="project-panel">
+          <div class="panel-inner">
+            <div class="panel-photos">
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+            </div>
+            <div class="panel-text">
+              <p>Replace with project details — how altitude and climate changed the
+              build, what was learned from the first house.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </a>
 
-    <a class="toc-row" hrerf="the-last-straw.html">
-      <div class="row">
-        <div class="num mono">004</div>
-        <div class="content">
-          <div class="toc-title">The Last Straw Magazine</div>
-          <div class="toc-meta">journalism</div>
+      <div class="project" id="proj-4">
+        <button class="project-row" onclick="toggleProject('proj-4')">
+          <span class="p-name"><span class="mark">&#9656;</span>The Last Straw Magazine</span>
+          <span class="p-text">Editorial and design contributions to a publication on natural building.</span>
+          <span class="p-thumb"><span class="ph"></span></span>
+        </button>
+        <div class="project-panel">
+          <div class="panel-inner">
+            <div class="panel-photos">
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+            </div>
+            <div class="panel-text">
+              <p>Replace with details of your contribution — issues, articles,
+              role on the publication.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </a>
 
-    <a class="toc-row" href="bail-open.html">
-      <div class="row">
-        <div class="num mono">005</div>
-        <div class="content">
-          <div class="toc-title">Bail Open</div>
-          <div class="toc-meta">reuse + retrofit</div>
+
+            <div class="project" id="proj-5">
+        <button class="project-row" onclick="toggleProject('proj-5')">
+          <span class="p-name"><span class="mark">&#9656;</span>Bail Open Gallery</span>
+          <span class="p-text">Editorial and design contributions to a publication on natural building.</span>
+          <span class="p-thumb"><span class="ph"></span></span>
+        </button>
+        <div class="project-panel">
+          <div class="panel-inner">
+            <div class="panel-photos">
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+              <span class="ph ph-sm"></span>
+            </div>
+            <div class="panel-text">
+              <p>Replace with details of your contribution — issues, articles,
+              role on the publication.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </a>
-
-    <a class="toc-row" href="tucson-gridshell.html">
-      <div class="row">
-        <div class="num mono">006</div>
-        <div class="content">
-          <div class="toc-title">Tucson Gridshell</div>
-          <div class="toc-meta">fabrication</div>
-        </div>
-      </div>
-    </a>
-
-  </div>
 
 
-  <div class="footer" style="margin-top: 40px;">
-    <div class="num mono">···</div>
-    <div class="content">
-      <span>Send me a message</span>
     </div>
+    <!-- /PROJECTS -->
+
   </div>
 
+  <p class="foot">(click a section to expand)</p>
 </div>
+
+<script>
+  function toggleAbout(){
+    document.getElementById('about').classList.toggle('open');
+  }
+  function toggleProject(id){
+    document.getElementById(id).classList.toggle('open');
+  }
+</script>
+
 </body>
 </html>
