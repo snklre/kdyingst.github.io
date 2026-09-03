@@ -371,11 +371,15 @@
 
  <p class="foot">(click a section to expand)</p>
 
-<!-- CLEAN, TESTED SCRIPT ENGINE BLOCK -->
+<!-- UPDATED SCRIPT ENGINE WITH TOUCH GESTURES -->
 <script>
   // Global memory tracks for the active slideshow array
   let activeImageSet = [];
   let activeImageIndex = 0;
+
+  // Touch tracking variables
+  let touchStartX = 0;
+  let touchEndX = 0;
 
   // 1. PROJECT ROW ACCORDION
   function toggleProject(id) {
@@ -397,7 +401,6 @@
     const container = document.getElementById(groupId);
     if (!container) return;
 
-    // Collects all individual child images inside this section box
     activeImageSet = Array.from(container.querySelectorAll('img'));
     activeImageIndex = indexPosition;
 
@@ -405,20 +408,18 @@
     document.getElementById('photo-modal').showModal();
   }
 
-  // 4. SHIFT ACTION CONTROLLER (For both clicks and arrow triggers)
+  // 4. SHIFT ACTION CONTROLLER
   function shiftPhoto(direction) {
     if (activeImageSet.length === 0) return;
     
     activeImageIndex += direction;
 
-    // Boundary rules: loop to start or end if tracking arrays clear limits
     if (activeImageIndex >= activeImageSet.length) activeImageIndex = 0;
     if (activeImageIndex < 0) activeImageIndex = activeImageSet.length - 1;
 
     renderActiveModalPhoto();
   }
 
-  // Update your script render function to match this setup:
   function renderActiveModalPhoto() {
     const nextImgAsset = activeImageSet[activeImageIndex];
     const targetModalFrame = document.getElementById('modal-img');
@@ -427,17 +428,46 @@
     if (nextImgAsset && targetModalFrame && targetDescPanel) {
       targetModalFrame.src = nextImgAsset.src;
       
-      // Pull the data-desc text attribute or show a fallback if empty
       const descriptionText = nextImgAsset.getAttribute('data-desc');
-      targetDescPanel.innerHTML = descriptionText ? descriptionText : "<i>No description provided for this documentation view.</i>";
+      targetDescPanel.innerHTML = descriptionText ? descriptionText : "<i>No description provided.</i>";
     }
   }
 
-  // 5. GLOBAL KEYBOARD ACCESSIBILITY LISTENERS
+  // 5. TOUCH GESTURE LISTENERS (FOR SWIPING)
+  const modalContainer = document.getElementById('photo-modal');
+  
+  if (modalContainer) {
+    // Record where the finger first touches the screen
+    modalContainer.addEventListener('touchstart', function(event) {
+      touchStartX = event.changedTouches[0].screenX;
+    }, { passive: true });
+
+    // Record where the finger leaves the screen and check the distance
+    modalContainer.addEventListener('touchend', function(event) {
+      touchEndX = event.changedTouches[0].screenX;
+      handleSwipeGesture();
+    }, { passive: true });
+  }
+
+  function handleSwipeGesture() {
+    const swipeThreshold = 50; // Minimum swipe distance in pixels to trigger an action
+    const totalSwipeDistance = touchEndX - touchStartX;
+
+    // Check if the gesture was a decisive left or right swipe
+    if (Math.abs(totalSwipeDistance) > swipeThreshold) {
+      if (totalSwipeDistance < 0) {
+        // Swiped left -> load next image
+        shiftPhoto(1);
+      } else {
+        // Swiped right -> load previous image
+        shiftPhoto(-1);
+      }
+    }
+  }
+
+  // 6. GLOBAL KEYBOARD ACCESSIBILITY LISTENERS
   document.addEventListener('keydown', function(event) {
     const modalElement = document.getElementById('photo-modal');
-    
-    // Check if the modal frame is active on the workspace screen layout
     if (modalElement && modalElement.open) {
       if (event.key === 'ArrowRight') {
         event.preventDefault();
@@ -452,6 +482,7 @@
 </script>
 
 
+
 <!-- BOTTOM-TEXT POPUP VIEW FRAME -->
 <dialog id="photo-modal" onclick="if(event.target === this) this.close()" style="border:3px solid var(--line); background:var(--paper); padding:0; position:fixed; top:48px; left:50%; transform:translateX(-50%); margin:0; width:95vw; max-width:1400px; height:calc(100vh - 96px); max-height:880px; z-index:9999; outline:none; box-shadow: 0 20px 50px rgba(0,0,0,0.15);">
   
@@ -463,7 +494,8 @@
       <!-- Nav Arrows -->
       <button onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">◂</button>
       
-      <img id="modal-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain; border: 1px;">
+<!-- REPAIRED MODAL IMAGE FOR PHONE SWIPINGS -->
+<img id="modal-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid var(--line); pointer-events: none; user-select: none; -webkit-user-drag: none;">
       
       <button onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">▸</button>
     </div>
