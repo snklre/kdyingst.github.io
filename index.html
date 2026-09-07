@@ -136,10 +136,13 @@
 
   .about-body p{
     margin:0;
-    padding:0 24px 20px;
-    font-size:12px;
+    padding: 24px 24px;
+    font-size:14px;
     line-height:1.6;
   }
+
+
+
 
   /* ---------------------------------------------------------
      PROJECT ROWS (2-column architectural system:
@@ -177,7 +180,7 @@
   }
 
   .p-desc-row{
-    font-size:12px;
+    font-size:14px;
     color:#333;
     line-height:1.5;
   }
@@ -195,6 +198,7 @@
     padding:0;
     background:var(--paper);
     overflow:hidden;
+    height:100%;
   }
 
   .p-thumb img.ph{
@@ -214,7 +218,10 @@
     transition:max-height 0.32s ease;
     border-top:1px solid var(--line-soft);
   }
-  .project.open .project-panel{ max-height:none; }
+/* Change this in your <style> section */
+.project.open .project-panel { 
+  /* max-height: none; */  <-- REMOVE OR COMMENT THIS OUT
+}
 
   .panel-inner{
     padding:22px 24px 28px;
@@ -227,10 +234,33 @@
     margin-bottom:24px;
   }
 
+.photo-group-wrapper2 {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 0 24px;        /* pulls the whole row in from left and right */
+  box-sizing: border-box; /* so padding doesn't add to the container's overall width */ 
+  padding-top: 8px;    /* adds space below the row of images */
+  padding-bottom: 24px;    /* adds space below the row of images */
+}
+
+.photo-group-wrapper2 img.ph {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 300px;          /* pick a height that suits your layout */
+  object-fit: cover;      /* crops to fill the box without distorting */
+  box-sizing: border-box;
+  border:none;  
+  cursor: arrow-pointer;
+
+}
+
   .photo-group-wrapper img.ph{
     width:100%;
     display:block;
-    border:1px solid var(--line);
+    border:0px solid var(--line);
     cursor:zoom-in;
     margin-bottom:8px;
   }
@@ -307,24 +337,32 @@
       </button>
       <div class="about-body">
         <p>
-          His practice moves between design and research with technical tools, DIY something, and investigative research.
+      My practice sits at the intersection of architecture, physical computation, and investigative journalism, grounding climate issues in specific sites through archival and policy research, fieldwork, and making. 
         </p>
+<div class="photo-group-wrapper2">
+  <img class="ph" src="images/0-about/0-about.jpeg" alt="Photo 1"
+       data-desc="The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum sills and trim, doug fir lumber, and dark aluminum windows.">
+  <img class="ph" src="images/0-about/0-about-1.JPG" alt="Photo 2"
+       data-desc="Second photo description here.">
+  <img class="ph" src="images/0-about/0-about-2.jpg" alt="Photo 2"
+       data-desc="Second photo description here.">
+</div>
       </div>
     </div>
 
     <!-- PROJECTS -->
 
-    <!-- Project 1 -->
+<!-- Start of Project 2 GZ -->
     <div class="project" id="proj-1">
       <button class="project-row" onclick="toggleProject('proj-1')">
         <div class="project-info-block">
           <div class="p-title-row">Passive Straw House</div>
           <div class="p-desc-row">
-            A climate friendly house equipped with photovoltaics, radiant heating and cooling, and active ventilation.
+            Climate friendly, low carbon residence made of straw bale panels.
           </div>
         </div>
         <div class="p-thumb">
-          <img class="ph" src="images/2-gz-12.jpg" alt="Passive Straw House exterior">
+          <img class="ph" src="images/2-gz/2-gz-0.jpg" alt="Passive Straw House exterior">
         </div>
       </button>
       <div class="project-panel">
@@ -332,115 +370,106 @@
           <div class="panel-photos" id="photos-proj-1">
 
             <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz-1.jpg" alt="Photo 1"
-                   data-desc="01 // FIELD DEPLOYMENT — The low-cost sensor housing attached to the central structural columns along the active transit line, recording ambient noise levels and temperature variations over an integrated 24-hour cycle."
+              <img class="ph" src="images/2-gz/2-gz-1.jpg" alt="Photo 1"
+                   data-desc="The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum sills and trim, doug fir lumber, and dark aluminum windows."
                    onclick="openZoom('photos-proj-1', 0)">
-              <p>01 // FIELD DEPLOYMENT — The low-cost sensor housing attached to the central structural columns along the active transit line, recording ambient noise levels and temperature variations over an integrated 24-hour cycle.</p>
+              <p>The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum sills and trim, doug fir lumber, and dark aluminum windows.</p>
             </div>
 
             <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz-2.jpg" alt="Photo 2"
-                   data-desc="02 // SPATIAL MAPPING — GIS visualization layout showing the cross-referenced particulate data mapped directly against the train schedule intervals to isolate deceleration peaks."
+              <img class="ph" src="images/2-gz/2-gz-2.jpg" alt="Photo 2"
+                   data-desc="XXX"
                    onclick="openZoom('photos-proj-1', 1)">
-              <p>02 // SPATIAL MAPPING — GIS visualization layout showing the cross-referenced particulate data mapped directly against the train schedule intervals to isolate deceleration peaks.</p>
+              <p>Kitchen and breakfast nook</p>
             </div>
 
             <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz-3.jpg" alt="Photo 3"
-                   data-desc="03 // PROTOTYPE TESTING — Laboratory calibration phase tracking sensor drift against professional reference hardware prior to long-term underground field positioning."
+              <img class="ph" src="images/2-gz/2-gz-3.jpg" alt="Photo 3"
+                   data-desc="XXX"
                    onclick="openZoom('photos-proj-1', 2)">
-              <p>03 // PROTOTYPE TESTING — Laboratory calibration phase tracking sensor drift against professional reference hardware prior to long-term underground field positioning.</p>
+              <p>XXX</p>
             </div>
 
-          </div>
-          <div class="panel-text"></div>
-        </div>
-      </div>
-    </div>
+             <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-4.jpg" alt="Photo 4"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
+            </div>
 
-    <!-- Project 2 (placeholder — fill in title, description, and images/proj2-*.jpg) -->
-    <div class="project" id="proj-2">
-      <button class="project-row" onclick="toggleProject('proj-2')">
-        <div class="project-info-block">
-          <div class="p-title-row">Project Title</div>
-          <div class="p-desc-row">
-            One-line description of the project goes here.
-          </div>
-        </div>
-        <div class="p-thumb">
-          <img class="ph" src="images/proj2-lead.jpg" alt="Project 2 lead photo">
-        </div>
-      </button>
-      <div class="project-panel">
-        <div class="panel-inner">
-          <div class="panel-photos" id="photos-proj-2">
             <div class="photo-group-wrapper">
-              <img class="ph" src="images/proj2-01.jpg" alt="Photo 1"
-                   data-desc="Caption for photo 1."
-                   onclick="openZoom('photos-proj-2', 0)">
-              <p>Caption for photo 1.</p>
+              <img class="ph" src="images/2-gz/2-gz-5.jpg" alt="Photo 5"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
             </div>
-          </div>
-          <div class="panel-text"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 3 (placeholder — fill in title, description, and images/proj3-*.jpg) -->
-    <div class="project" id="proj-3">
-      <button class="project-row" onclick="toggleProject('proj-3')">
-        <div class="project-info-block">
-          <div class="p-title-row">Project Title</div>
-          <div class="p-desc-row">
-            One-line description of the project goes here.
-          </div>
-        </div>
-        <div class="p-thumb">
-          <img class="ph" src="images/proj3-lead.jpg" alt="Project 3 lead photo">
-        </div>
-      </button>
-      <div class="project-panel">
-        <div class="panel-inner">
-          <div class="panel-photos" id="photos-proj-3">
             <div class="photo-group-wrapper">
-              <img class="ph" src="images/proj3-01.jpg" alt="Photo 1"
-                   data-desc="Caption for photo 1."
-                   onclick="openZoom('photos-proj-3', 0)">
-              <p>Caption for photo 1.</p>
+              <img class="ph" src="images/2-gz/2-gz-6.jpg" alt="Photo 6"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
             </div>
-          </div>
-          <div class="panel-text"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 4 (placeholder — fill in title, description, and images/proj4-*.jpg) -->
-    <div class="project" id="proj-4">
-      <button class="project-row" onclick="toggleProject('proj-4')">
-        <div class="project-info-block">
-          <div class="p-title-row">Project Title</div>
-          <div class="p-desc-row">
-            One-line description of the project goes here.
-          </div>
-        </div>
-        <div class="p-thumb">
-          <img class="ph" src="images/proj4-lead.jpg" alt="Project 4 lead photo">
-        </div>
-      </button>
-      <div class="project-panel">
-        <div class="panel-inner">
-          <div class="panel-photos" id="photos-proj-4">
-            <div class="photo-group-wrapper">
-              <img class="ph" src="images/proj4-01.jpg" alt="Photo 1"
-                   data-desc="Caption for photo 1."
-                   onclick="openZoom('photos-proj-4', 0)">
-              <p>Caption for photo 1.</p>
+             <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-7.jpg" alt="Photo 7"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
             </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-8.jpg" alt="Photo 8"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
+            </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-9.jpg" alt="Photo 9"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
+            </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-10.jpg" alt="Photo 10"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
+            </div>
+
+             <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-11.jpg" alt="Photo 11"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-12.jpg" alt="Photo 12"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
+            </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-13.jpg" alt="Photo 13"
+                   data-desc="XXX"
+                   onclick="openZoom('photos-proj-1', 2)">
+              <p>XXX</p>
+            </div>
+
           </div>
           <div class="panel-text"></div>
         </div>
       </div>
     </div>
+    <!-- End of Project 2 - GZ -->
+  
+
+
+
 
     <!-- /PROJECTS -->
 
@@ -453,9 +482,10 @@
 <!-- LIGHTBOX / SLIDESHOW MODAL -->
 <dialog id="photo-modal" onclick="if(event.target === this) this.close()" style="border:3px solid var(--line); background:var(--paper); padding:0; position:fixed; top:48px; left:50%; transform:translateX(-50%); margin:0; width:95vw; max-width:1400px; height:calc(100vh - 96px); max-height:880px; z-index:9999; outline:none; box-shadow:0 20px 50px rgba(0,0,0,0.15);">
   <div style="display:flex; flex-direction:column; width:100%; height:100%; position:relative;">
+    <button onclick="closeModal()" style="position:absolute; top:8px; right:8px; background:none; border:none; color:var(--ink); font-size:24px; line-height:1; cursor:pointer; padding:8px; z-index:10001; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&times;</button>
     <div style="position:relative; flex:1; display:flex; align-items:center; justify-content:center; background:var(--paper); overflow:hidden; padding:10px;">
-      <button class="modal-arrow" onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9668;</button>
-      <img id="modal-img" src="" style="width:98%; height:98%; object-fit:contain; border:1px solid var(--line); user-select:none; -webkit-user-drag:none; background:var(--paper);">
+    <button class="modal-arrow" onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9668;</button>
+      <img id="modal-img" src="" style="width:98%; height:98%; object-fit:contain; border:0px solid var(--line); user-select:none; -webkit-user-drag:none; background:var(--paper);">
       <button class="modal-arrow" onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9658;</button>
     </div>
     <div id="modal-desc-panel" style="border-top:1px solid var(--line); padding:16px 20px 20px; font-size:13px; line-height:1.6; color:var(--ink); background:var(--paper); flex-shrink:0; font-family:Arial, sans-serif; text-align:left;"></div>
@@ -463,120 +493,115 @@
 </dialog>
 
 <script>
-  let activeImageSet = [];
-  let activeImageIndex = 0;
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  /* GRID SNAP — .page is centered with auto margins, so its
-     natural left offset is whatever's left over from the
-     viewport width and isn't guaranteed to land on a 24px grid
-     line. This measures the actual visible left edge of the
-     outer border, rounds it to the nearest grid line, and
-     nudges the page's own margin to close the gap — so the
-     frame's corners snap to the grid at any window width. */
-  function snapPageToGrid(){
-    const page = document.querySelector('.page');
-    const outer = document.querySelector('.outer');
-    if (!page || !outer) return;
-    const GRID = 24;
-    page.style.marginLeft = '';
-    const naturalLeft = outer.getBoundingClientRect().left;
-    const snappedLeft = Math.round(naturalLeft / GRID) * GRID;
-    const delta = snappedLeft - naturalLeft;
-    if (Math.abs(delta) > 0.5){
-      const naturalMarginLeft = parseFloat(getComputedStyle(page).marginLeft) || 0;
-      page.style.marginLeft = (naturalMarginLeft + delta) + 'px';
+  // ==========================================
+  // ABOUT SECTION SYSTEM
+  // ==========================================
+  function toggleAbout() {
+    var aboutDiv = document.getElementById('about');
+    aboutDiv.classList.toggle('open');
+    var body = aboutDiv.querySelector('.about-body');
+    if (aboutDiv.classList.contains('open')) {
+      body.style.maxHeight = body.scrollHeight + "px";
+    } else {
+      body.style.maxHeight = "0px";
     }
   }
-  window.addEventListener('load', snapPageToGrid);
-  let snapResizeTimer;
-  window.addEventListener('resize', function(){
-    clearTimeout(snapResizeTimer);
-    snapResizeTimer = setTimeout(snapPageToGrid, 100);
-  });
 
-  function toggleProject(id){
-    const targetProject = document.getElementById(id);
-    if (!targetProject) return;
-    const isAlreadyOpen = targetProject.classList.contains('open');
-    document.querySelectorAll('.project').forEach(proj => proj.classList.remove('open'));
-    if (!isAlreadyOpen) targetProject.classList.add('open');
+  // ==========================================
+  // ACCORDION SCROLL LOGIC
+  // ==========================================
+  function toggleProject(projectId) {
+    var targetProject = document.getElementById(projectId);
+
+    var allProjects = document.querySelectorAll('.project');
+    allProjects.forEach(function(proj) {
+      if (proj.id !== projectId && proj.classList.contains('open')) {
+        proj.classList.remove('open');
+        proj.querySelector('.project-panel').style.maxHeight = "0px";
+      }
+    });
+
+    targetProject.classList.toggle('open');
+    var panel = targetProject.querySelector('.project-panel');
+
+    if (targetProject.classList.contains('open')) {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      setTimeout(function() {
+        targetProject.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 250);
+    } else {
+      panel.style.maxHeight = "0px";
+    }
   }
 
-  function toggleAbout(){
-    const aboutBox = document.getElementById('about');
-    if (aboutBox) aboutBox.classList.toggle('open');
-  }
+  // ==========================================
+  // IMAGE ZOOM / GALLERY MODAL SYSTEM
+  // ==========================================
+  var currentGallery = [];
+  var currentIndex = 0;
 
-  function openZoom(groupId, indexPosition){
-    const container = document.getElementById(groupId);
+  // groupId = the id of the container holding this set of photos (e.g. "photos-proj-1")
+  // index = which image within that container was clicked
+  function openZoom(groupId, index) {
+    var container = document.getElementById(groupId);
     if (!container) return;
-    activeImageSet = Array.from(container.querySelectorAll('img'));
-    activeImageIndex = indexPosition;
-    renderActiveModalPhoto();
-    document.getElementById('photo-modal').showModal();
+
+    var imgs = container.querySelectorAll('img.ph');
+    currentGallery = Array.prototype.map.call(imgs, function(img) {
+      return { src: img.src, desc: img.getAttribute('data-desc') || '' };
+    });
+    currentIndex = index;
+
+    showCurrentPhoto();
+
+    var modal = document.getElementById('photo-modal');
+    if (typeof modal.showModal === 'function') {
+      modal.showModal();
+    } else {
+      modal.setAttribute('open', ''); // fallback for older browsers
+    }
+    document.body.style.overflow = 'hidden';
   }
 
-  function shiftPhoto(direction){
-    if (activeImageSet.length === 0) return;
-    activeImageIndex += direction;
-    if (activeImageIndex >= activeImageSet.length) activeImageIndex = 0;
-    if (activeImageIndex < 0) activeImageIndex = activeImageSet.length - 1;
-    renderActiveModalPhoto();
+  function showCurrentPhoto() {
+    var item = currentGallery[currentIndex];
+    if (!item) return;
+    document.getElementById('modal-img').src = item.src;
+    document.getElementById('modal-desc-panel').textContent = item.desc;
   }
 
-  function renderActiveModalPhoto(){
-    const nextImgAsset = activeImageSet[activeImageIndex];
-    const targetModalFrame = document.getElementById('modal-img');
-    const targetDescPanel = document.getElementById('modal-desc-panel');
-    if (nextImgAsset && targetModalFrame && targetDescPanel){
-      targetModalFrame.src = nextImgAsset.src;
-      const descriptionText = nextImgAsset.getAttribute('data-desc');
-      targetDescPanel.innerHTML = descriptionText ? descriptionText : "<i>No description provided.</i>";
+  function shiftPhoto(direction) {
+    if (currentGallery.length === 0) return;
+    currentIndex = (currentIndex + direction + currentGallery.length) % currentGallery.length;
+    showCurrentPhoto();
+  }
+
+  function closeModal() {
+    var modal = document.getElementById('photo-modal');
+    if (typeof modal.close === 'function' && modal.open) {
+      modal.close();
+    } else {
+      modal.removeAttribute('open');
     }
   }
 
-  function handleSwipeGesture(){
-    const swipeThreshold = 40;
-    const totalSwipeDistance = touchEndX - touchStartX;
-    const modalElement = document.getElementById('photo-modal');
-    if (modalElement && modalElement.open && Math.abs(totalSwipeDistance) > swipeThreshold){
-      if (totalSwipeDistance < 0){
-        shiftPhoto(1);
-      } else {
-        shiftPhoto(-1);
-      }
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    const targetImageNode = document.getElementById('modal-img');
-    if (targetImageNode){
-      targetImageNode.addEventListener('touchstart', function(event){
-        touchStartX = event.changedTouches[0].clientX;
-      }, { passive:true });
-      targetImageNode.addEventListener('touchend', function(event){
-        touchEndX = event.changedTouches[0].clientX;
-        handleSwipeGesture();
-      }, { passive:true });
-    }
+  // native <dialog> fires 'close' on Escape automatically once opened via showModal()
+  document.getElementById('photo-modal').addEventListener('close', function() {
+    document.body.style.overflow = 'auto';
   });
 
-  document.addEventListener('keydown', function(event){
-    const modalElement = document.getElementById('photo-modal');
-    if (modalElement && modalElement.open){
-      if (event.key === 'ArrowRight'){
-        event.preventDefault();
-        shiftPhoto(1);
-      }
-      if (event.key === 'ArrowLeft'){
-        event.preventDefault();
-        shiftPhoto(-1);
-      }
+  // optional: left/right arrow keys navigate too, not just on-screen buttons
+  document.addEventListener('keydown', function(e) {
+    var modal = document.getElementById('photo-modal');
+    if (modal.open) {
+      if (e.key === 'ArrowLeft') shiftPhoto(-1);
+      if (e.key === 'ArrowRight') shiftPhoto(1);
     }
   });
 </script>
+
+
+
 
 </body>
 </html>
