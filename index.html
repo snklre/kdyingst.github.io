@@ -106,10 +106,11 @@
     border-bottom:1px solid var(--ink);
     letter-spacing:1px;
     padding-bottom:1px;
-    cursor:pointer;
+    cursor:auto;
     white-space:nowrap;
   }
-  .email:hover{ opacity:0.6; }
+  .email:hover{ opacity:0.6; 
+  cursor: auto;}
 
   /* ---------------------------------------------------------
      ABOUT (collapsible)
@@ -122,7 +123,7 @@
     border:none;
     color:var(--ink);
     padding:14px 24px;
-    cursor:pointer;
+    cursor:zoom-in;
     text-align:left;
   }
   .about-toggle:hover{ background:var(--hover); }
@@ -135,10 +136,12 @@
   .about.open .about-body{ max-height:none; }
 
   .about-body p{
-    margin:0;
+    margin-left:auto;
+    margin-right: 40px;
     padding: 24px 24px;
     font-size:14px;
     line-height:1.6;
+    cursor: auto;
   }
 
 
@@ -154,7 +157,7 @@
     width:100%;
     background:none;
     border:none;
-    cursor:pointer;
+    cursor:zoom-in;
     text-align:left;
     font-family:Arial, Helvetica, sans-serif;
     color:var(--ink);
@@ -175,14 +178,29 @@
     line-height:1.4;
   }
 
-  .p-title-row{
-    margin-bottom:8px;
-  }
+.p-title-row{
+  margin:0;
+  padding:0;
+  line-height:1.4;
+  margin-bottom:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:12px;
+}
+
+.p-location{
+  font-weight:400;
+  font-size:14px;
+  letter-spacing:0.5px;
+      color:#5a5959;
+}
 
   .p-desc-row{
     font-size:14px;
-    color:#333;
     line-height:1.5;
+    font-weight: 400;
+    letter-spacing: 0.5px;
   }
 
   /* right-side thumbnail — position:relative + an absolutely
@@ -253,8 +271,6 @@
   object-fit: cover;      /* crops to fill the box without distorting */
   box-sizing: border-box;
   border:none;  
-  cursor: arrow-pointer;
-
 }
 
   .photo-group-wrapper img.ph{
@@ -264,13 +280,13 @@
     cursor:zoom-in;
     margin-bottom:8px;
   }
-  .photo-group-wrapper p{
-    font-size:12px;
-    line-height:1.5;
-    color:#555;
-    margin:0;
-    padding:0 4px;
-  }
+.photo-group-wrapper p{
+  font-size:12px;
+  line-height:1.5;
+  color:#555;
+  margin:0;
+  padding:0 4px;
+}
 
   .panel-text{
     font-size:14px;
@@ -316,6 +332,8 @@
     .about-body, .project-panel{ transition:none !important; }
   }
 
+////////////////HTML/////////////////
+
 </style>
 </head>
 <body>
@@ -333,18 +351,18 @@
     <!-- ABOUT -->
     <div class="about" id="about">
       <button class="about-toggle" onclick="toggleAbout()">
-        <span>architect and researcher in London, UK</span>
+        <span>Architect and Researcher in London, UK</span>
       </button>
       <div class="about-body">
         <p>
-      My practice sits at the intersection of architecture, physical computation, and investigative journalism, grounding climate issues in specific sites through archival and policy research, fieldwork, and making. 
+      I design buildings and technologies and investigate climate  effects on materials, ecologies, and policy.<br>I have worked in reserach, historic retrofit, straw building, fabrication, publication, and have led community workshops.
         </p>
 <div class="photo-group-wrapper2">
-  <img class="ph" src="images/0-about/0-about.jpeg" alt="Photo 1"
+  <img class="ph" src="images/0-about/0-about.jpg" alt="Photo 1"
        data-desc="The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum sills and trim, doug fir lumber, and dark aluminum windows.">
-  <img class="ph" src="images/0-about/0-about-1.JPG" alt="Photo 2"
+  <img class="ph" src="images/0-about/0-about-1.webp" alt="Photo 2"
        data-desc="Second photo description here.">
-  <img class="ph" src="images/0-about/0-about-2.jpg" alt="Photo 2"
+  <img class="ph" src="images/0-about/0-about-2.webp" alt="Photo 2"
        data-desc="Second photo description here.">
 </div>
       </div>
@@ -352,127 +370,612 @@
 
     <!-- PROJECTS -->
 
-<!-- Start of Project 2 GZ -->
+
+<!-- Start of Project 1 US -->
     <div class="project" id="proj-1">
       <button class="project-row" onclick="toggleProject('proj-1')">
         <div class="project-info-block">
-          <div class="p-title-row">Passive Straw House</div>
+          <div class="p-title-row">
+            <span>Underground Sensing</span>
+                        <span class="p-location">research</span>
+          </div>
           <div class="p-desc-row">
-            Climate friendly, low carbon residence made of straw bale panels.
+            <br>Invesigation of London Underground air and sound with archive and policy research, spatial study, and physical computing.<br><br>
           </div>
         </div>
         <div class="p-thumb">
-          <img class="ph" src="images/2-gz/2-gz-0.jpg" alt="Passive Straw House exterior">
+          <img class="ph" src="images/1-us/1-us-1.webp" alt="Sierra Straw Home exterior">
         </div>
       </button>
       <div class="project-panel">
         <div class="panel-inner">
           <div class="panel-photos" id="photos-proj-1">
-
+<div class="p-title-row">   
+Following archival research and technical, material, and physical evidence of the 130-year-old network, it is hypothesised that the construction of the tube has created an unhealthy 
+environment. Air, sound, and temperature qualities surpass those of human comfort and health thresholds, although the standards in the underground are unique compared to above ground, 
+leaving most reports to call for further study. To address these evidentiary gaps in scientific reports, and bypass bureaucratic approval processes, Underground Sensing deployed low-
+cost DIY electronic sensors throughout the train network to quantify and critique air, sound, and temperature conditions. Although the pollution affects all commuters, datasets were 
+framed around drivers and workers to build a broader understanding of an environmental health impact that had not yet been studied. Initial sensors measured air particulate and sound, 
+and later prototypes introduced magnetism and pressure for geolocation, and radio for data telemetry. Careful attention to methodology and calibration techniques evolved the datasets 
+from random to reliable and comparable results. Through critical making and technical calibration, the project has evolved from a homemade device to collaborating with transit unions 
+and Transport for London on an approved onboard sensor. A test trial is set for late-September to create a spatial dataset of particulate air and sound, while debuting novel geolocation 
+and mesh network technologies in the underground.
+<br><br>Currently in development at the Centre for Research Architecture.
+</div>
+          <div class="panel-text"></div>
             <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-1.jpg" alt="Photo 1"
-                   data-desc="The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum sills and trim, doug fir lumber, and dark aluminum windows."
-                   onclick="openZoom('photos-proj-1', 0)">
-              <p>The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum sills and trim, doug fir lumber, and dark aluminum windows.</p>
+              <img class="ph" src="images/1-us/1-us-1.webp" alt="Front Neon Sign"
+                   data-desc="Following the 2020 Fork Fire, the existing home completely burned and site was damaged. The small budget was determined by the FEMA payout."
+                   onclick="openZoom('photos-proj-7', 1)">
             </div>
 
-            <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-2.jpg" alt="Photo 2"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 1)">
-              <p>Kitchen and breakfast nook</p>
-            </div>
+          <div class="panel-text">
+<div class="p-title-row">Position: Graduate Student<br>Tutors: Susan Schuppli, Christina Varvia, and João Ruivo</div>
+</div>
 
-            <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-3.jpg" alt="Photo 3"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-             <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-4.jpg" alt="Photo 4"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-            <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-5.jpg" alt="Photo 5"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-            <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-6.jpg" alt="Photo 6"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-             <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-7.jpg" alt="Photo 7"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-              <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-8.jpg" alt="Photo 8"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-              <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-9.jpg" alt="Photo 9"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-              <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-10.jpg" alt="Photo 10"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-             <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-11.jpg" alt="Photo 11"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-            <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-12.jpg" alt="Photo 12"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-              <div class="photo-group-wrapper">
-              <img class="ph" src="images/2-gz/2-gz-13.jpg" alt="Photo 13"
-                   data-desc="XXX"
-                   onclick="openZoom('photos-proj-1', 2)">
-              <p>XXX</p>
-            </div>
-
-          </div>
           <div class="panel-text"></div>
         </div>
       </div>
     </div>
-    <!-- End of Project 2 - GZ -->
-  
+</div>
+<!-- End of Project 1 - US -->
 
 
+<!-- Start of Project 2 GZ -->
+    <div class="project" id="proj-2">
+      <button class="project-row" onclick="toggleProject('proj-2')">
+        <div class="project-info-block">
+<div class="p-title-row">
+  <span>Passive Straw House</span>
+  <span class="p-location">architecture</span></div>
+          <div class="p-desc-row">
+           <br>Design and construction of a three-story low-carbon straw panel home using smart, natural technologies, and bespoke detailing in Palo Alto, California.
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/2-gz/2-gz-0.webp" alt="Passive Straw House exterior">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-2">
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-1.webp" alt="Passive Straw House exterior"
+                   data-desc="The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum trim, doug fir lumber, and dark aluminum windows. The front features a water catchment system recycling all site and indoor water."
+                   onclick="openZoom('photos-proj-2', 0)">
+              <p>The exterior is a combination of fiber cement cladding, reclaimed redwood siding, dark aluminum trim, doug fir lumber, and dark aluminum windows. The front features a water catchment system recycling all site and indoor water.</p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-2.webp" alt="Photo 2"
+                   data-desc="The walls are made of Ecococon Panels - fabricated and shipped in Lithuania. Voids between panels, seen above, are sized to the extreme structural conditions. All panels were modeled by our team in order to size and fulfill the order"
+                   onclick="openZoom('photos-proj-2', 1)">
+              <p>The walls are made of Ecococon Panels - fabricated and shipped in Lithuania. Voids between panels, seen above, are sized to the extreme structural conditions. All panels were modeled by our team in order to size and fulfill the order.</p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-3.webp" alt="Photo 3"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-2', 2)">
+              <p></p>
+            </div>
+
+             <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-4.webp" alt="Photo 4"
+                   data-desc="The central hall that connects all three levels is clad with thick rammed earth panels, seen here opening into a music room with an edge-lit glass floor."
+                   onclick="openZoom('photos-proj-2', 3)">
+              <p>The central hall that connects all three levels is clad with thick rammed earth panels, seen here opening into a music room with an edge-lit glass floor.</p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-5.webp" alt="Photo 5"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-2', 4)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-6.webp" alt="Photo 6"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-2', 5)">
+              <p></p>
+            </div>
+
+             <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-7.webp" alt="Photo 7"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-2', 6)">
+              <p></p>
+            </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-8.webp" alt="Photo 8"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-2', 7)">
+              <p></p>
+            </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-9.webp" alt="Photo 9"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-1',8)">
+              <p></p>
+            </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-10.webp alt="Photo 10"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-1', 8)">
+              <p></p>
+            </div>
+
+             <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-11.webp" alt="Photo 11"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-1', 10)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-12.webp" alt="Photo 12"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-1', 11)">
+              <p></p>
+            </div>
+
+              <div class="photo-group-wrapper">
+              <img class="ph" src="images/2-gz/2-gz-13.webp" alt="Photo 13"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-1', 12)">
+              <p></p>
+            </div>
+<div>
+<div class="p-title-row">Position: Project Manager <br>Project Team: Christina Woodfin, Tom Devore, and David Arkin | Arkin Tilt Architects<br><br>Contractor: Earth Bound Homes | Structural: Verdant Structural Engineers | Landscape Architect: Terri McFarland | Civil Engineer: Aliquot | Mechanical: Beyond Efficency | Greywater System: Digg Collective | Lighting Design: Anna Kondolf Lighting Design | Photographer: Edward Caldwell</div>
+</div>    </div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+<!-- End of Project 2 - GZ -->
+
+<!-------------------------->
+<!-- Start of Project 3 - Sierra Straw Home -->
+    <div class="project" id="proj-3">
+      <button class="project-row" onclick="toggleProject('proj-3')">
+        <div class="project-info-block">
+          <div class="p-title-row">
+            <span>Sierra Straw Home</span>
+            <span class="p-location">architecture</span>
+          </div>
+          <div class="p-desc-row">
+            <br>An economical straw bale home recovering from wildfire, built of straw and clay under a steel carport superstructure in North Fork, California.<br><br>
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/3-fz/3-fz-0.webp" alt="Sierra Straw Home exterior">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-3">
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-0.webp" alt="Photo, burned home, 2020 Fork Fire"
+                   data-desc="Following the 2020 Fork Fire, the existing home completely burned and site was damaged. The small budget was determined by the FEMA payout."
+                   onclick="openZoom('photos-proj-3', 0)">
+              <p>Following the 2020 Fork Fire, the existing home completely burned and site was damaged. The small budget was determined by the FEMA payout.</p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-1.webp" alt="Photo 2"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 1)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-2.jpg" alt="Photo 3"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 2)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-3.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 3)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-4.jpg" alt="Photo 5"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 4)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-5.webp" alt="Photo 6"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 5)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-6.webp" alt="Photo 7"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 6)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-7.webp" alt="Photo 8"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 7)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/3-fz/3-fz-8.webp" alt="Photo 9"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 8)">
+              <p></p>
+            </div>
+
+          </div>
+
+          <div class="panel-text">
+<div class="p-title-row">Position: Project Manager <br>Project Team: David Arkin | Arkin Tilt Architects<br><br>Contractor: McNamara Construction | Structural: Verdant Structural Engineers | Mechanical: Beyond Efficency</div>
+</div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Project 3 - Sierra Straw Home -->
+
+<!-------------------------->
+
+<!-- Start of Project 4 TLS -->
+    <div class="project" id="proj-4">
+      <button class="project-row" onclick="toggleProject('proj-4')">
+        <div class="project-info-block">
+          <div class="p-title-row">
+            <span>The Last Straw Magazine</span>
+            <span class="p-location">publication</span>
+          </div>
+          <div class="p-desc-row">
+            <br>Cooperative team reporting on climate engaged buildings, communities and techniques around the world.<br><br>
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/4-tls/4-tls-1.webp" alt="Sierra Straw Home exterior">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-3">
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/4-tls/4-tls-1.webp" alt="Photo, burned home, 2020 Fork Fire"
+                   data-desc="Following the 2020 Fork Fire, the existing home completely burned and site was damaged. The small budget was determined by the FEMA payout."
+                   onclick="openZoom('photos-proj-4', 0)">
+              <p>Following the 2020 Fork Fire, the existing home completely burned and site was damaged. The small budget was determined by the FEMA payout.</p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/4-tls/4-tls-2.webp" alt="Photo 2"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-4', 1)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/4-tls/4-tls-4.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 2)">
+          <p></p>
+          </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/4-tls/4-tls-6.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-3', 3)">
+          <p></p>
+          </div>
+
+          <div class="panel-text">
+<div class="p-title-row">Position: Designer & Editor<br>Collective: Kenny Fallon Jr, Gavin Fraser, Zoe Gardner, and Elliot Wilson</div>
+</div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- End of Project 4 - TLS -->
+
+    <!---------------->
+
+
+<!-- Start of Project 5 HHA -->
+    <div class="project" id="proj-5">
+      <button class="project-row" onclick="toggleProject('proj-5')">
+        <div class="project-info-block">
+          <div class="p-title-row">
+            <span>Bail Open Gallery</span>
+            <span class="p-location">architecture</span>
+          </div>
+          <div class="p-desc-row">
+            <br>The retrofit of an janitorial supply warehouse into a gallery and studio for a found-object artist in San Francisco, CA.
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/5-hha/5-hha-1.webp" alt="Sierra Straw Home exterior">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-3">
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/5-hha/5-hha-0.webp" alt="Front Neon Sign"
+                   data-desc="Following the 2020 Fork Fire, the existing home completely burned and site was damaged. The small budget was determined by the FEMA payout."
+                   onclick="openZoom('photos-proj-5', 0)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/5-hha/5-hha-3.webp" alt="Interior Gallery"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-5', 1)">
+              <p></p>
+            </div>
+
+           <div class="photo-group-wrapper">
+              <img class="ph" src="images/5-hha/5-hha-6.webp" alt="Photo 4"
+                   data-desc="Stair connecting the lower floor gallery and upper floor studio."
+                   onclick="openZoom('photos-proj-5', 2)">
+          <p>Stair connecting the lower floor gallery and upper floor studio.</p>
+          </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/5-hha/5-hha-4.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-5', 3)">
+          <p></p>
+          </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/5-hha/5-hha-5.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-5', 4)">
+          <p></p>
+          </div>
+
+          <div class="photo-group-wrapper">
+              <img class="ph" src="images/5-hha/5-hha-1.webp" alt="Historic Neon sign"
+                   data-desc="The historic neon sign in front once sat above the client's bail bonds business on Bryant Street. We worked with city planners, artisian craftspeople, and a community maker space to legally approve, restore and install the sign"
+                   onclick="openZoom('photos-proj-5', 5)">
+          <p>The historic neon sign in front once sat above the client's bail bonds business on Bryant Street. We worked with city planners, artisian craftspeople, and a community maker space to legally approve, restore and install the sign.</p>
+          </div>
+
+          <div class="panel-text">
+<div class="p-title-row">Position: Project Manager <br>Harvey Hacker Architects<br><br>Contractor: Narrowback | Structural: DP Advanced Engineering | Civil Engineer: Aliquot | Mechanical: MHC Engineers | Lighting Design: Becca Foster</div>
+</div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+     </div>
+    <!-- End of Project 5 - HHA -->
+
+
+<!-- Start of Project 6 Grid -->
+    <div class="project" id="proj-6">
+      <button class="project-row" onclick="toggleProject('proj-6')">
+        <div class="project-info-block">
+          <div class="p-title-row">
+            <span>Gridshell at the University of Arizona</span>
+            <span class="p-location">fabrication</span>
+          </div>
+          <div class="p-desc-row">
+            <br>The fabrication of the first ever steel gridshell, in Tucson, AZ.<br>
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/6-grid/6-grid-0.webp" alt="shell at sunset">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-6">
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/6-grid/6-grid-1.webp" alt="Gridshell from the street"
+                   data-desc="The project sits right outside the architecture school in central Tucson. Funded my experimental structures research, this is first all steel gridshell ever. The student-led studios were tasked with designing and fabricating it over three years."
+                   onclick="openZoom('photos-proj-6', 0)">
+              <p>The project sits right outside the architecture school in central Tucson. Funded my experimental structures research, this is first all steel gridshell ever. The student-led studios were tasked with designing and fabricating it over three years.</p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/6-grid/6-grid-2.webp" alt="Lifting the gridhsell in place"
+                   data-desc="Raising the steel lattice to form the requirements and benefits of a gridshell. At the proper height, the lattice was welded in place, and miles of steel reinforment will fill in between."
+                   onclick="openZoom('photos-proj-6', 1)">
+              <p>Raising the steel lattice to form the requirements and benefits of a gridshell. At the proper height, the lattice was welded in place, and miles of steel reinforment will fill in between.</p>
+            </div>
+
+
+               <div class="photo-group-wrapper">
+              <img class="ph" src="images/6-grid/6-grid-7.jpg" alt="The gridshell from above"
+                   data-desc="The gridshell, from above. We built the shell and all site features including new stairs, ramps, seating, and lighting"
+                   onclick="openZoom('photos-proj-6', 2)">
+          <p>The gridshell, from above. We built the shell and all site features including new stairs, ramps, seating, and lighting.</p>
+          </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/6-grid/6-grid-3.jpg" alt="Site features on the gridshell: bridge, stairs, ramps, seats, and lighting."
+                   data-desc="The site features of the gridshell. The project also features an ADA ramp connecting an unaccessible building to the street."
+                   onclick="openZoom('photos-proj-6', 3)">
+          <p>The site features of the gridshell. The project also features an ADA ramp connecting an unaccessible building to the street.</p>
+          </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/6-grid/6-grid-4.webp" alt="Photo 4"
+                   data-desc="Cladding installation begins on the crest and worked out. In order to ease cladding installation, all pieces of cladding are the same."
+                   onclick="openZoom('photos-proj-6', 4)">
+          <p>Cladding installation begins on the crest and worked out. In order to ease cladding installation, all pieces of cladding are the same.</p>
+          </div>
+
+                      <div class="photo-group-wrapper">
+              <img class="ph" src="images/6-grid/6-grid-5.webp" alt="Photo 4"
+                   data-desc="The overlaps in the steel cladding creates a Moiré pattern, an interference pattern effect."
+                   onclick="openZoom('photos-proj-6', 5)">
+          <p>The overlaps in the steel cladding creates a Moiré pattern, an interference pattern effect.</p>
+          </div>
+
+                <div class="photo-group-wrapper">
+              <img class="ph" src="images/6-grid/6-grid-6.jpg" alt="Photo 4"
+                   data-desc="Under the shell after completion of construction."
+                   onclick="openZoom('photos-proj-6', 6)">
+          <p>Under the shell after completion of construction.</p>
+          </div>
+
+
+          <div class="panel-text">
+<div class="p-title-row">Position: Builder<br>Project Team: 2016+2017 design-build studios | University of Arizona<br>Tutor: Chris Trumble</div>
+</div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- End of Project 6 - Grid -->
+
+
+<!-- Start of Project 7 CASBA -->
+    <div class="project" id="proj-7">
+      <button class="project-row" onclick="toggleProject('proj-7')">
+        <div class="project-info-block">
+          <div class="p-title-row">
+            <span>California Straw Building Assosciation</span>
+                        <span class="p-location">community</span>
+          </div>
+          <div class="p-desc-row">
+            <br>Training communities in natural construction history, design and building techniques.
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/7-casba/7-casba-0.webp" alt="Sierra Straw Home exterior">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-7">
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/7-casba/7-casba-1.webp" alt="Front Neon Sign"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-7', 0)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/7-casba/7-casba-2.webp" alt="Interior Gallery"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-7', 1)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/7-casba/7-casba-3.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-7', 2)">
+          <p></p>
+          </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/7-casba/7-casba-4.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-7', 3)">
+          <p></p>
+          </div>
+
+                      <div class="photo-group-wrapper">
+              <img class="ph" src="images/7-casba/7-casba-5.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-7', 4)">
+          <p></p>
+          </div>
+
+          <div class="panel-text">
+<div class="p-title-row"><div class="panel-text">
+  <p>Position: Member and Technicianr<br>Tutors: Massey Burke, Anni Tilt, David Arkin, and Myles Taylor<br></p>
+</div></div>
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+        </div>
+</div>
+    <!-- End of Project 7 - CASBA -->
+
+
+<!-- Start of Project 8 UNJUST -->
+    <div class="project" id="proj-8">
+      <button class="project-row" onclick="toggleProject('proj-8')">
+        <div class="project-info-block">
+          <div class="p-title-row">
+            <span>Architectures of Unjust Enrichment</span>
+            <span class="p-location">research</span>
+          </div>
+          <div class="p-desc-row">
+            <br>A 40-student spatial and financial investigation with the Centre for Research Architecture.
+          </div>
+        </div>
+        <div class="p-thumb">
+          <img class="ph" src="images/8-unjust/8-unjust-1.webp" alt="Sierra Straw Home exterior">
+        </div>
+      </button>
+      <div class="project-panel">
+        <div class="panel-inner">
+          <div class="panel-photos" id="photos-proj-8">
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/8-unjust/8-unjust-1.webp" alt="Front Neon Sign"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-8', 0)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/8-unjust/8-unjust-2.webp" alt="Interior Gallery"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-8', 1)">
+              <p></p>
+            </div>
+
+            <div class="photo-group-wrapper">
+              <img class="ph" src="images/8-unjust/8-unjust-3.webp" alt="Photo 4"
+                   data-desc=""
+                   onclick="openZoom('photos-proj-8', 2)">
+          <p></p>
+          </div>
+
+          <div class="panel-text">
+<div class="p-title-row">
+  <p>Position: Student Researcher and Designer<br>Tutors: Susan Schuppli, Christina Varvia, and João Ruivo<br></p>
+</div>
+
+
+          <div class="panel-text"></div>
+        </div>
+      </div>
+    </div>
+</div>
+    <!-- End of Project 7 - UNJUST -->
 
 
     <!-- /PROJECTS -->
-
+  </div>
   </div>
   </div>
 
@@ -482,11 +985,11 @@
 <!-- LIGHTBOX / SLIDESHOW MODAL -->
 <dialog id="photo-modal" onclick="if(event.target === this) this.close()" style="border:3px solid var(--line); background:var(--paper); padding:0; position:fixed; top:48px; left:50%; transform:translateX(-50%); margin:0; width:95vw; max-width:1400px; height:calc(100vh - 96px); max-height:880px; z-index:9999; outline:none; box-shadow:0 20px 50px rgba(0,0,0,0.15);">
   <div style="display:flex; flex-direction:column; width:100%; height:100%; position:relative;">
-    <button onclick="closeModal()" style="position:absolute; top:8px; right:8px; background:none; border:none; color:var(--ink); font-size:24px; line-height:1; cursor:pointer; padding:8px; z-index:10001; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&times;</button>
+    <button onclick="closeModal()" style="position:absolute; top:8px; right:8px; background:none; border:none; color:var(--ink); font-size:24px; line-height:1; cursor:auto; padding:8px; z-index:10001; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&times;</button>
     <div style="position:relative; flex:1; display:flex; align-items:center; justify-content:center; background:var(--paper); overflow:hidden; padding:10px;">
-    <button class="modal-arrow" onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9668;</button>
+    <button class="modal-arrow" onclick="shiftPhoto(-1)" style="position:absolute; left:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:auto; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9668;</button>
       <img id="modal-img" src="" style="width:98%; height:98%; object-fit:contain; border:0px solid var(--line); user-select:none; -webkit-user-drag:none; background:var(--paper);">
-      <button class="modal-arrow" onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:pointer; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9658;</button>
+      <button class="modal-arrow" onclick="shiftPhoto(1)" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink); padding:12px; font-family:monospace; cursor:auto; font-size:28px; z-index:10000; outline:none; opacity:0.6;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&#9658;</button>
     </div>
     <div id="modal-desc-panel" style="border-top:1px solid var(--line); padding:16px 20px 20px; font-size:13px; line-height:1.6; color:var(--ink); background:var(--paper); flex-shrink:0; font-family:Arial, sans-serif; text-align:left;"></div>
   </div>
@@ -510,29 +1013,56 @@
   // ==========================================
   // ACCORDION SCROLL LOGIC
   // ==========================================
-  function toggleProject(projectId) {
-    var targetProject = document.getElementById(projectId);
+function toggleProject(projectId) {
+  var targetProject = document.getElementById(projectId);
+  var wasOpen = targetProject.classList.contains('open');
 
-    var allProjects = document.querySelectorAll('.project');
-    allProjects.forEach(function(proj) {
-      if (proj.id !== projectId && proj.classList.contains('open')) {
-        proj.classList.remove('open');
-        proj.querySelector('.project-panel').style.maxHeight = "0px";
+  var allProjects = document.querySelectorAll('.project');
+  var closingPanels = [];
+  allProjects.forEach(function(proj) {
+    if (proj.id !== projectId && proj.classList.contains('open')) {
+      proj.classList.remove('open');
+      var p = proj.querySelector('.project-panel');
+      p.style.maxHeight = "0px";
+      closingPanels.push(p);
+    }
+  });
+
+  targetProject.classList.toggle('open');
+  var panel = targetProject.querySelector('.project-panel');
+
+  if (!wasOpen) {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+
+    // Only scroll once every panel involved has actually
+    // finished animating — not on a guessed timer.
+    var pending = closingPanels.length + 1;
+    var settled = false;
+
+    function onDone() {
+      pending--;
+      if (pending <= 0 && !settled) {
+        settled = true;
+        targetProject.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    }
+
+    panel.addEventListener('transitionend', onDone, { once: true });
+    closingPanels.forEach(function(p) {
+      p.addEventListener('transitionend', onDone, { once: true });
     });
 
-    targetProject.classList.toggle('open');
-    var panel = targetProject.querySelector('.project-panel');
-
-    if (targetProject.classList.contains('open')) {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-      setTimeout(function() {
+    // safety net in case a transitionend never fires
+    setTimeout(function() {
+      if (!settled) {
+        settled = true;
         targetProject.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 250);
-    } else {
-      panel.style.maxHeight = "0px";
-    }
+      }
+    }, 400);
+  } else {
+    panel.style.maxHeight = "0px";
   }
+}
 
   // ==========================================
   // IMAGE ZOOM / GALLERY MODAL SYSTEM
